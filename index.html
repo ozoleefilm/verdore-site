@@ -1418,6 +1418,8 @@ function showAdminSec(name,el){
   document.querySelectorAll('.admin-nav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('admin-'+name).classList.add('active');
   if(el)el.classList.add('active');
+  if(name==='characters-admin') renderAdminChars();
+  else refreshAdmin();
 }
 
 /* ═══ EP MODAL ═══ */

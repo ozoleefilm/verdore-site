@@ -494,6 +494,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;
 </style>
 </head>
 <body>
+<!-- GITHUB LOADING OVERLAY -->
+<div id="gh-loader" style="display:none;position:fixed;inset:0;background:rgba(8,12,20,.96);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;">
+  <div style="width:48px;height:48px;border:2px solid rgba(150,180,220,.2);border-top-color:var(--moonlight-dim);border-radius:50%;animation:spin 1s linear infinite;"></div>
+  <div style="font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.25em;color:var(--text-dim);">LOADING</div>
+  <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+</div>
 <div class="moon-deco"></div>
 
 <!-- LIGHTBOX -->
@@ -1028,7 +1034,8 @@ async function save(){
 }
 
 function showLoader(on){
-  document.getElementById('gh-loader').style.display = on ? 'flex' : 'none';
+  const el = document.getElementById('gh-loader');
+  if(el) el.style.display = on ? 'flex' : 'none';
 }
 
 /* ═══ AUTH ═══ */
@@ -1584,14 +1591,12 @@ async function init(){
   renderHomeCharsPreview();
   renderReviews();renderGallery();renderViewer(0);
 }
-init();
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 </script>
 
-<!-- GITHUB LOADING OVERLAY -->
-<div id="gh-loader" style="display:none;position:fixed;inset:0;background:rgba(8,12,20,.96);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;">
-  <div style="width:48px;height:48px;border:2px solid rgba(150,180,220,.2);border-top-color:var(--moonlight-dim);border-radius:50%;animation:spin 1s linear infinite;"></div>
-  <div style="font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.25em;color:var(--text-dim);">LOADING</div>
-  <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
-</div>
 </body>
 </html>

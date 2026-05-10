@@ -6,7 +6,8 @@
 <title>죽은 남편의 성은 나를 놓아주지 않는다</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root {
+/* ════ VARIABLES ════ */
+:root{
   --bg-dark:#080c14;--bg-mid:#0d1220;--bg-card:#111826;
   --navy-deep:#0a0f1e;--navy-mid:#112244;--navy-light:#1a3366;
   --moonlight:#c8d8f0;--moonlight-dim:#8aa0c4;
@@ -14,79 +15,126 @@
   --gold-pale:#c8a86a;--gold-dim:#7a6030;
   --text-main:#d0dcec;--text-dim:#7a8fa8;--text-body:#b0c0d8;
   --border:rgba(100,130,180,.15);--border-bright:rgba(150,180,220,.25);
-  --admin-accent:#3a7bd5;--admin-green:#2a9d6f;--admin-red:#c0392b;
+  --admin-accent:#3a7bd5;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg-dark);color:var(--text-main);font-family:'Noto Serif KR',serif;min-height:100vh;cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='3' fill='%238aa0c4' opacity='0.7'/%3E%3C/svg%3E") 10 10,auto}
-body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(1px 1px at 15% 20%,rgba(200,216,240,.4) 0%,transparent 100%),radial-gradient(1px 1px at 42% 8%,rgba(200,216,240,.3) 0%,transparent 100%),radial-gradient(1px 1px at 73% 15%,rgba(200,216,240,.5) 0%,transparent 100%),radial-gradient(1px 1px at 88% 33%,rgba(200,216,240,.3) 0%,transparent 100%),radial-gradient(1px 1px at 25% 55%,rgba(200,216,240,.2) 0%,transparent 100%),radial-gradient(1px 1px at 60% 45%,rgba(200,216,240,.4) 0%,transparent 100%),radial-gradient(1px 1px at 5% 80%,rgba(200,216,240,.3) 0%,transparent 100%),radial-gradient(1px 1px at 90% 70%,rgba(200,216,240,.4) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 50% 90%,rgba(200,216,240,.5) 0%,transparent 100%),radial-gradient(1px 1px at 33% 75%,rgba(200,216,240,.2) 0%,transparent 100%);pointer-events:none;z-index:0}
-body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(17,34,68,.6) 0%,transparent 60%);pointer-events:none;z-index:0}
+body{background:var(--bg-dark);color:var(--text-main);font-family:'Noto Serif KR',serif;min-height:100vh;
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='3' fill='%238aa0c4' opacity='.7'/%3E%3C/svg%3E") 10 10,auto}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:
+  radial-gradient(1px 1px at 15% 20%,rgba(200,216,240,.4) 0%,transparent 100%),
+  radial-gradient(1px 1px at 42% 8%,rgba(200,216,240,.3) 0%,transparent 100%),
+  radial-gradient(1px 1px at 73% 15%,rgba(200,216,240,.5) 0%,transparent 100%),
+  radial-gradient(1px 1px at 88% 33%,rgba(200,216,240,.3) 0%,transparent 100%),
+  radial-gradient(1px 1px at 25% 55%,rgba(200,216,240,.2) 0%,transparent 100%),
+  radial-gradient(1px 1px at 60% 45%,rgba(200,216,240,.4) 0%,transparent 100%),
+  radial-gradient(1px 1px at 5% 80%,rgba(200,216,240,.3) 0%,transparent 100%),
+  radial-gradient(1px 1px at 90% 70%,rgba(200,216,240,.4) 0%,transparent 100%),
+  radial-gradient(1.5px 1.5px at 50% 90%,rgba(200,216,240,.5) 0%,transparent 100%),
+  radial-gradient(1px 1px at 33% 75%,rgba(200,216,240,.2) 0%,transparent 100%)}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(17,34,68,.6) 0%,transparent 60%)}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(180deg,rgba(8,12,20,.98) 0%,rgba(8,12,20,.85) 100%);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+/* ════ NAV ════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;
+  background:linear-gradient(180deg,rgba(8,12,20,.98),rgba(8,12,20,.85));
+  border-bottom:1px solid var(--border);backdrop-filter:blur(12px);
+  padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.15em;color:var(--silver);opacity:.8;cursor:pointer}
-.nav-tabs{display:flex;gap:0;list-style:none}
-.nav-tabs li a{display:block;padding:0 1.1rem;height:60px;line-height:60px;font-size:.75rem;letter-spacing:.08em;color:var(--text-dim);text-decoration:none;transition:color .3s,border-bottom .3s;border-bottom:2px solid transparent;white-space:nowrap}
+.nav-tabs{display:flex;list-style:none}
+.nav-tabs li a{display:block;padding:0 1.1rem;height:60px;line-height:60px;font-size:.75rem;
+  letter-spacing:.08em;color:var(--text-dim);text-decoration:none;
+  transition:color .3s,border-bottom .3s;border-bottom:2px solid transparent;white-space:nowrap}
 .nav-tabs li a:hover,.nav-tabs li a.active{color:var(--moonlight);border-bottom-color:var(--moonlight-dim)}
-.nav-admin-btn{font-size:.62rem;letter-spacing:.12em;color:var(--text-dim);padding:.3rem .8rem;border:1px solid var(--border);background:transparent;cursor:pointer;font-family:'Cinzel',serif;transition:all .2s}
+.nav-admin-btn{font-size:.62rem;letter-spacing:.12em;color:var(--text-dim);padding:.3rem .8rem;
+  border:1px solid var(--border);background:transparent;cursor:pointer;font-family:'Cinzel',serif;transition:all .2s}
 .nav-admin-btn:hover{color:var(--gold-pale);border-color:var(--gold-dim)}
 .nav-admin-btn.on{color:var(--admin-accent);border-color:var(--admin-accent)}
 
-/* PAGES */
+/* ════ PAGES ════ */
 .page{display:none;padding-top:60px;min-height:100vh;position:relative;z-index:1}
 .page.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .page.active>*{animation:fadeIn .45s ease forwards}
 @keyframes fadeSlide{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 
-/* HOME */
-.home-hero{position:relative;min-height:calc(100vh - 60px);display:grid;grid-template-columns:1fr 1fr;align-items:center;max-width:1200px;margin:0 auto;padding:4rem 2rem;gap:4rem}
+/* ════ HOME ════ */
+.home-hero{min-height:calc(100vh - 60px);display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;max-width:1200px;margin:0 auto;padding:4rem 2rem;gap:4rem}
 .home-cover-wrap{position:relative;display:flex;justify-content:center}
-.home-cover{width:320px;border:1px solid var(--border-bright);box-shadow:0 0 60px rgba(100,140,220,.15),0 0 120px rgba(50,80,160,.08),inset 0 0 30px rgba(0,0,0,.5);animation:coverFloat 6s ease-in-out infinite}
-.cover-glow{position:absolute;width:320px;height:100%;background:radial-gradient(ellipse at center,rgba(100,140,220,.12) 0%,transparent 70%);pointer-events:none;animation:coverFloat 6s ease-in-out infinite}
+.home-cover{width:320px;border:1px solid var(--border-bright);
+  box-shadow:0 0 60px rgba(100,140,220,.15),0 0 120px rgba(50,80,160,.08),inset 0 0 30px rgba(0,0,0,.5);
+  animation:coverFloat 6s ease-in-out infinite}
+.cover-glow{position:absolute;width:320px;height:100%;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(100,140,220,.12) 0%,transparent 70%);
+  animation:coverFloat 6s ease-in-out infinite}
 @keyframes coverFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .home-info{display:flex;flex-direction:column;gap:1.5rem}
 .home-genre-tags{display:flex;flex-wrap:wrap;gap:.5rem}
-.tag{padding:.25rem .75rem;border:1px solid var(--border-bright);font-size:.68rem;letter-spacing:.06em;color:var(--moonlight-dim);background:rgba(100,140,220,.05)}
-.home-title{font-family:'Noto Serif KR',serif;font-size:1.9rem;font-weight:700;line-height:1.5;color:var(--moonlight);text-shadow:0 0 40px rgba(100,150,220,.3);letter-spacing:-.01em}
-.home-logline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--silver);line-height:1.8;border-left:2px solid var(--navy-light);padding-left:1.2rem}
+.tag{padding:.25rem .75rem;border:1px solid var(--border-bright);font-size:.68rem;
+  letter-spacing:.06em;color:var(--moonlight-dim);background:rgba(100,140,220,.05)}
+.home-title{font-family:'Noto Serif KR',serif;font-size:1.9rem;font-weight:700;line-height:1.5;
+  color:var(--moonlight);text-shadow:0 0 40px rgba(100,150,220,.3);letter-spacing:-.01em}
+.home-logline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;
+  color:var(--silver);line-height:1.8;border-left:2px solid var(--navy-light);padding-left:1.2rem}
 .home-synopsis-label{font-size:.65rem;letter-spacing:.2em;color:var(--text-dim);font-family:'Cinzel',serif}
 .home-synopsis{font-size:.88rem;line-height:2;color:var(--text-body)}
 .keyword-wrap{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
 .keyword{font-size:.68rem;color:var(--gold-pale);opacity:.7}
 .keyword::before{content:'#';margin-right:1px}
-.home-cta{display:inline-flex;align-items:center;gap:.6rem;padding:.8rem 2rem;background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));border:1px solid var(--border-bright);color:var(--moonlight);font-size:.8rem;letter-spacing:.1em;cursor:pointer;transition:all .3s;text-decoration:none;width:fit-content;font-family:'Noto Serif KR',serif}
-.home-cta:hover{background:linear-gradient(135deg,var(--navy-light),#224488);box-shadow:0 0 20px rgba(100,150,220,.2);transform:translateX(4px)}
+.home-cta{display:inline-flex;align-items:center;gap:.6rem;padding:.8rem 2rem;
+  background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));
+  border:1px solid var(--border-bright);color:var(--moonlight);font-size:.8rem;
+  letter-spacing:.1em;cursor:pointer;transition:all .3s;text-decoration:none;
+  width:fit-content;font-family:'Noto Serif KR',serif}
+.home-cta:hover{background:linear-gradient(135deg,var(--navy-light),#224488);
+  box-shadow:0 0 20px rgba(100,150,220,.2);transform:translateX(4px)}
 .divider-ornament{display:flex;align-items:center;gap:1rem;padding:3rem 2rem;max-width:1200px;margin:0 auto}
-.divider-ornament::before,.divider-ornament::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border-bright),transparent)}
+.divider-ornament::before,.divider-ornament::after{content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border-bright),transparent)}
 .ornament-symbol{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--silver-dim);opacity:.5;letter-spacing:.3em}
+.home-chars-preview{max-width:1100px;margin:0 auto;padding:0 2rem 5rem;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.home-char-item{background:var(--bg-dark);padding:1.5rem;display:flex;align-items:center;gap:1rem;cursor:pointer}
+.home-char-item:hover{background:var(--bg-card)}
+.home-char-item img{width:60px;height:80px;object-fit:cover;object-position:top;filter:brightness(.8) saturate(.7)}
+.home-char-role{font-size:.6rem;letter-spacing:.15em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.3rem}
+.home-char-name{font-size:.9rem;color:var(--moonlight)}
+.home-char-desc{font-size:.72rem;color:var(--text-dim);margin-top:.2rem}
 
-/* SECTION HEADER */
+/* ════ SECTION HEADER ════ */
 .section-header{text-align:center;padding:3rem 2rem 2rem}
 .section-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.3em;color:var(--text-dim);margin-bottom:.8rem}
 .section-title-kr{font-size:1.4rem;font-weight:300;color:var(--moonlight);letter-spacing:.05em}
 
-/* CHARS */
-.char-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;max-width:1100px;margin:0 auto;padding:0 2rem 4rem;background:var(--border)}
-.char-card{background:var(--bg-dark);overflow:hidden;cursor:pointer;transition:all .4s}
+/* ════ CHARACTERS PUBLIC ════ */
+.char-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;
+  max-width:1100px;margin:0 auto;padding:0 2rem 2rem;background:var(--border)}
+.char-card{background:var(--bg-dark);overflow:hidden;cursor:pointer;transition:background .3s}
 .char-card:hover{background:var(--bg-card)}
 .char-img-wrap{position:relative;overflow:hidden;height:400px}
-.char-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s ease;filter:brightness(.8) saturate(.7)}
+.char-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:top;
+  transition:transform .6s ease,filter .4s;filter:brightness(.8) saturate(.7)}
 .char-card:hover .char-img-wrap img{transform:scale(1.04);filter:brightness(.9) saturate(.9)}
 .char-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--bg-dark) 100%)}
 .char-info{padding:1.5rem;border-top:1px solid var(--border)}
 .char-role{font-size:.62rem;letter-spacing:.2em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.4rem}
 .char-name{font-size:1.2rem;font-weight:500;color:var(--moonlight);margin-bottom:.6rem}
 .char-desc{font-size:.8rem;line-height:1.8;color:var(--text-body)}
-.char-detail-panel{display:none;background:var(--bg-card);border:1px solid var(--border-bright);padding:2rem;max-width:700px;margin:0 auto 2rem;animation:fadeSlide .4s ease}
+.char-detail-panel{display:none;background:var(--bg-card);border:1px solid var(--border-bright);
+  padding:2rem;max-width:700px;margin:0 auto 2rem;animation:fadeSlide .4s ease}
 .char-detail-panel.open{display:block}
 .char-trait-list{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
 .char-trait-list li{font-size:.7rem;padding:.2rem .7rem;border:1px solid var(--border-bright);color:var(--moonlight-dim)}
+.char-no-img{width:100%;height:400px;display:flex;align-items:center;justify-content:center;
+  background:rgba(17,34,68,.3);color:var(--text-dim);font-size:.8rem;letter-spacing:.1em;font-family:'Cinzel',serif}
 
-/* CONTENTS */
+/* ════ CONTENTS ════ */
 .contents-wrap{max-width:800px;margin:0 auto;padding:0 2rem 4rem}
-.volume-title{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.25em;color:var(--silver-dim);padding:1rem 0 .5rem;border-top:1px solid var(--border);margin-bottom:.5rem}
-.ep-item{display:flex;align-items:center;justify-content:space-between;padding:.8rem .3rem;border-bottom:1px solid var(--border);cursor:pointer;transition:all .2s;gap:1rem}
+.volume-title{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.25em;color:var(--silver-dim);
+  padding:1rem 0 .5rem;border-top:1px solid var(--border);margin-bottom:.5rem}
+.ep-item{display:flex;align-items:center;gap:1rem;padding:.8rem .3rem;
+  border-bottom:1px solid var(--border);cursor:pointer;transition:all .2s}
 .ep-item:hover:not(.disabled){background:rgba(100,140,220,.04);padding-left:.8rem}
 .ep-item.disabled{opacity:.4;cursor:default;pointer-events:none}
 .ep-num{font-family:'Cinzel',serif;font-size:.6rem;color:var(--text-dim);min-width:60px;letter-spacing:.1em}
@@ -96,45 +144,63 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
 .ep-status.new{color:var(--gold-pale);border:1px solid var(--gold-dim);padding:.1rem .4rem}
 .ep-status.upcoming{opacity:.4}
 
-/* VIEWER */
-.viewer-controls{display:flex;align-items:center;justify-content:space-between;max-width:720px;margin:0 auto;padding:1rem 2rem;border-bottom:1px solid var(--border);gap:1rem}
+/* ════ VIEWER ════ */
+.viewer-controls{display:flex;align-items:center;justify-content:space-between;
+  max-width:720px;margin:0 auto;padding:1rem 2rem;border-bottom:1px solid var(--border);gap:1rem}
 .viewer-ep-info{font-size:.75rem;color:var(--text-dim);letter-spacing:.05em}
-.viewer-btn{padding:.4rem 1rem;background:transparent;border:1px solid var(--border-bright);color:var(--text-dim);font-size:.7rem;cursor:pointer;transition:all .2s;font-family:'Noto Serif KR',serif;letter-spacing:.05em}
+.viewer-btn{padding:.4rem 1rem;background:transparent;border:1px solid var(--border-bright);
+  color:var(--text-dim);font-size:.7rem;cursor:pointer;transition:all .2s;
+  font-family:'Noto Serif KR',serif;letter-spacing:.05em}
 .viewer-btn:hover{color:var(--moonlight);border-color:var(--moonlight-dim)}
 .viewer-content{max-width:680px;margin:0 auto;padding:3rem 2rem 6rem}
-.viewer-chapter-title{font-size:1.1rem;font-weight:500;color:var(--moonlight);margin-bottom:.4rem;letter-spacing:.03em}
-.viewer-chapter-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;color:var(--silver-dim);margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.viewer-chapter-title{font-size:1.1rem;font-weight:500;color:var(--moonlight);margin-bottom:.4rem}
+.viewer-chapter-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;
+  color:var(--silver-dim);margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
 .viewer-body{font-size:1rem;line-height:2.2;color:var(--text-body);word-break:keep-all}
 .viewer-body p{margin-bottom:1.4rem;text-indent:1em}
 .viewer-body .dialogue{color:var(--moonlight);font-weight:400}
-.viewer-illust{width:100%;max-width:500px;margin:3rem auto;display:block;border:1px solid var(--border-bright);box-shadow:0 0 40px rgba(100,140,220,.1)}
-.illust-caption{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.78rem;color:var(--silver-dim);margin-top:.8rem;margin-bottom:2rem}
-.scene-break{text-align:center;color:var(--silver-dim);opacity:.4;letter-spacing:.5em;font-size:.8rem;margin:2.5rem 0;font-family:'Cinzel',serif}
-.placeholder-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--text-dim);text-align:center;padding:4rem 2rem;border:1px solid var(--border);line-height:2}
+.viewer-illust{width:100%;max-width:500px;margin:3rem auto;display:block;
+  border:1px solid var(--border-bright);box-shadow:0 0 40px rgba(100,140,220,.1)}
+.illust-caption{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:.78rem;color:var(--silver-dim);margin-top:.8rem;margin-bottom:2rem}
+.scene-break{text-align:center;color:var(--silver-dim);opacity:.4;letter-spacing:.5em;
+  font-size:.8rem;margin:2.5rem 0;font-family:'Cinzel',serif}
+.placeholder-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;
+  color:var(--text-dim);text-align:center;padding:4rem 2rem;line-height:2}
 
-/* GALLERY */
-.gallery-grid{columns:3;column-gap:1px;max-width:1100px;margin:0 auto;padding:0 2rem 4rem;background:var(--border)}
+/* ════ GALLERY ════ */
+.gallery-grid{columns:3;column-gap:1px;max-width:1100px;margin:0 auto;
+  padding:0 2rem 4rem;background:var(--border)}
+@media(max-width:768px){.gallery-grid{columns:2}}
 .gallery-item{break-inside:avoid;margin-bottom:1px;position:relative;overflow:hidden;cursor:pointer}
-.gallery-item img{width:100%;display:block;filter:brightness(.8) saturate(.7);transition:all .5s ease}
+.gallery-item img{width:100%;display:block;filter:brightness(.8) saturate(.7);transition:all .5s}
 .gallery-item:hover img{filter:brightness(1) saturate(.9);transform:scale(1.02)}
-.gallery-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(8,12,20,.8) 100%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:1rem}
+.gallery-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(8,12,20,.8) 100%);
+  opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:1rem}
 .gallery-item:hover .gallery-overlay{opacity:1}
 .gallery-caption{font-size:.72rem;color:var(--moonlight);letter-spacing:.05em}
-.lightbox{display:none;position:fixed;inset:0;background:rgba(5,8,15,.95);z-index:200;align-items:center;justify-content:center}
+.lightbox{display:none;position:fixed;inset:0;background:rgba(5,8,15,.95);z-index:200;
+  align-items:center;justify-content:center}
 .lightbox.open{display:flex}
 .lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border:1px solid var(--border-bright)}
-.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:1px solid var(--border-bright);color:var(--silver);width:36px;height:36px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;background:none;
+  border:1px solid var(--border-bright);color:var(--silver);width:36px;height:36px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .lightbox-close:hover{background:rgba(100,140,220,.1);color:var(--moonlight)}
 
-/* REVIEWS */
+/* ════ REVIEWS ════ */
 .reviews-wrap{max-width:800px;margin:0 auto;padding:0 2rem 4rem}
 .review-form-section{background:var(--bg-card);border:1px solid var(--border);padding:2rem;margin-bottom:2rem}
 .review-form-title{font-size:.7rem;letter-spacing:.2em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:1.2rem}
 .form-row{margin-bottom:1rem}
 .form-label{display:block;font-size:.7rem;color:var(--text-dim);margin-bottom:.4rem;letter-spacing:.05em}
-.form-input,.form-textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);color:var(--text-main);padding:.7rem 1rem;font-family:'Noto Serif KR',serif;font-size:.85rem;outline:none;transition:border-color .2s;resize:none}
+.form-input,.form-textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);
+  color:var(--text-main);padding:.7rem 1rem;font-family:'Noto Serif KR',serif;font-size:.85rem;
+  outline:none;transition:border-color .2s;resize:none}
 .form-input:focus,.form-textarea:focus{border-color:var(--moonlight-dim)}
-.form-submit{padding:.7rem 2rem;background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));border:1px solid var(--border-bright);color:var(--moonlight);font-family:'Noto Serif KR',serif;font-size:.8rem;letter-spacing:.05em;cursor:pointer;transition:all .2s;margin-top:.5rem}
+.form-submit{padding:.7rem 2rem;background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));
+  border:1px solid var(--border-bright);color:var(--moonlight);font-family:'Noto Serif KR',serif;
+  font-size:.8rem;letter-spacing:.05em;cursor:pointer;transition:all .2s;margin-top:.5rem}
 .form-submit:hover{box-shadow:0 0 16px rgba(100,150,220,.2)}
 .star-select{display:flex;gap:.4rem;margin-top:.3rem}
 .star-select span{font-size:1.1rem;color:var(--text-dim);cursor:pointer;transition:color .2s}
@@ -148,63 +214,82 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
 .review-date{font-size:.65rem;color:var(--text-dim)}
 .review-body{font-size:.85rem;line-height:1.9;color:var(--text-body)}
 
-/* ADMIN LOGIN */
-.admin-login-overlay{display:none;position:fixed;inset:0;background:rgba(4,6,12,.97);z-index:300;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+/* ════ ADMIN LOGIN ════ */
+.admin-login-overlay{display:none;position:fixed;inset:0;background:rgba(4,6,12,.97);
+  z-index:300;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
 .admin-login-overlay.open{display:flex}
-.admin-login-box{width:380px;background:var(--bg-card);border:1px solid var(--border-bright);padding:2.5rem;box-shadow:0 0 60px rgba(50,100,200,.15);animation:fadeSlide .4s ease;position:relative}
+.admin-login-box{width:380px;background:var(--bg-card);border:1px solid var(--border-bright);
+  padding:2.5rem;box-shadow:0 0 60px rgba(50,100,200,.15);animation:fadeSlide .4s ease;position:relative}
 .admin-login-logo{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.3em;color:var(--text-dim);margin-bottom:.6rem}
 .admin-login-title{font-size:1.1rem;color:var(--moonlight);margin-bottom:.3rem}
 .admin-login-sub{font-size:.75rem;color:var(--text-dim);margin-bottom:2rem;line-height:1.6}
 .admin-pw-wrap{position:relative}
-.admin-pw-input{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);color:var(--text-main);padding:.8rem 3rem .8rem 1rem;font-family:'Noto Serif KR',serif;font-size:.9rem;outline:none;transition:border-color .2s;letter-spacing:.1em}
+.admin-pw-input{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);
+  color:var(--text-main);padding:.8rem 3rem .8rem 1rem;font-family:'Noto Serif KR',serif;
+  font-size:.9rem;outline:none;transition:border-color .2s;letter-spacing:.1em}
 .admin-pw-input:focus{border-color:var(--moonlight-dim)}
-.admin-pw-toggle{position:absolute;right:.8rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:.8rem}
-.admin-login-btn{width:100%;margin-top:1rem;padding:.85rem;background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));border:1px solid var(--border-bright);color:var(--moonlight);font-family:'Noto Serif KR',serif;font-size:.85rem;letter-spacing:.08em;cursor:pointer;transition:all .2s}
+.admin-pw-toggle{position:absolute;right:.8rem;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:.8rem}
+.admin-login-btn{width:100%;margin-top:1rem;padding:.85rem;
+  background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));
+  border:1px solid var(--border-bright);color:var(--moonlight);font-family:'Noto Serif KR',serif;
+  font-size:.85rem;letter-spacing:.08em;cursor:pointer;transition:all .2s}
 .admin-login-btn:hover{box-shadow:0 0 20px rgba(100,150,220,.25)}
 .admin-login-error{font-size:.75rem;color:#e05555;margin-top:.6rem;min-height:1.2rem}
-.admin-login-close{position:absolute;top:1rem;right:1rem;background:none;border:1px solid var(--border);color:var(--text-dim);width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.admin-login-close{position:absolute;top:1rem;right:1rem;background:none;border:1px solid var(--border);
+  color:var(--text-dim);width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .admin-login-close:hover{color:var(--moonlight)}
 
-/* ADMIN LAYOUT */
+/* ════ ADMIN LAYOUT ════ */
 .admin-layout{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 60px)}
-.admin-sidebar{background:rgba(10,15,30,.9);border-right:1px solid var(--border);padding:1.5rem 0;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;display:flex;flex-direction:column}
-.admin-sidebar-title{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.28em;color:var(--text-dim);padding:.5rem 1.5rem 1rem;border-bottom:1px solid var(--border);margin-bottom:.5rem}
-.admin-nav-item{display:flex;align-items:center;gap:.7rem;padding:.75rem 1.5rem;cursor:pointer;font-size:.8rem;color:var(--text-dim);transition:all .2s;border-left:2px solid transparent}
+.admin-sidebar{background:rgba(10,15,30,.9);border-right:1px solid var(--border);padding:1.5rem 0;
+  position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;display:flex;flex-direction:column}
+.admin-sidebar-title{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.28em;color:var(--text-dim);
+  padding:.5rem 1.5rem 1rem;border-bottom:1px solid var(--border);margin-bottom:.5rem}
+.admin-nav-item{display:flex;align-items:center;gap:.7rem;padding:.75rem 1.5rem;cursor:pointer;
+  font-size:.8rem;color:var(--text-dim);transition:all .2s;border-left:2px solid transparent}
 .admin-nav-item:hover{background:rgba(100,140,220,.05);color:var(--text-main)}
 .admin-nav-item.active{color:var(--moonlight);border-left-color:var(--moonlight-dim);background:rgba(100,140,220,.06)}
 .admin-nav-icon{font-size:1rem;opacity:.7}
-.admin-badge{margin-left:auto;font-size:.58rem;padding:.1rem .45rem;background:rgba(58,123,213,.18);border:1px solid rgba(58,123,213,.35);color:var(--admin-accent);border-radius:8px}
+.admin-badge{margin-left:auto;font-size:.58rem;padding:.1rem .45rem;background:rgba(58,123,213,.18);
+  border:1px solid rgba(58,123,213,.35);color:var(--admin-accent);border-radius:8px}
 .admin-sidebar-footer{margin-top:auto;padding:1.5rem}
 .admin-main{padding:2rem;overflow-x:hidden}
 .admin-section{display:none}
 .admin-section.active{display:block;animation:fadeIn .3s ease}
-.admin-section-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border);gap:1rem}
+.admin-section-header{display:flex;align-items:flex-start;justify-content:space-between;
+  margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border);gap:1rem;flex-wrap:wrap}
 .admin-section-title{font-size:1rem;color:var(--moonlight);font-weight:500}
 .admin-section-sub{font-size:.72rem;color:var(--text-dim);margin-top:.2rem}
 
-/* ADMIN STATS */
-.admin-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+/* admin stats */
+.admin-stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:2rem}
 .admin-stat-card{background:var(--bg-card);border:1px solid var(--border);padding:1.2rem;transition:border-color .2s}
 .admin-stat-card:hover{border-color:var(--border-bright)}
-.admin-stat-label{font-size:.6rem;letter-spacing:.15em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.4rem}
+.admin-stat-label{font-size:.58rem;letter-spacing:.15em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.4rem}
 .admin-stat-value{font-size:1.6rem;color:var(--moonlight);font-weight:300}
 .admin-stat-note{font-size:.64rem;color:var(--text-dim);margin-top:.2rem}
 
-/* ADMIN CARDS & FORMS */
+/* admin cards / forms */
 .admin-card{background:var(--bg-card);border:1px solid var(--border);padding:1.5rem;margin-bottom:1.5rem}
-.admin-card-title{font-size:.68rem;letter-spacing:.2em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:1.2rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
+.admin-card-title{font-size:.68rem;letter-spacing:.2em;color:var(--text-dim);font-family:'Cinzel',serif;
+  margin-bottom:1.2rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
 .admin-form-row{margin-bottom:1rem}
 .admin-label{display:block;font-size:.72rem;color:var(--text-dim);margin-bottom:.4rem;letter-spacing:.04em}
 .admin-label span{color:var(--admin-accent);margin-left:.3rem;font-size:.64rem}
-.admin-input,.admin-textarea,.admin-select{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);color:var(--text-main);padding:.7rem 1rem;font-family:'Noto Serif KR',serif;font-size:.85rem;outline:none;transition:border-color .2s;resize:vertical}
+.admin-input,.admin-textarea,.admin-select{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);
+  color:var(--text-main);padding:.7rem 1rem;font-family:'Noto Serif KR',serif;font-size:.85rem;
+  outline:none;transition:border-color .2s;resize:vertical}
 .admin-input:focus,.admin-textarea:focus,.admin-select:focus{border-color:var(--moonlight-dim)}
 .admin-select{cursor:pointer}
 .admin-select option{background:var(--bg-card)}
 .admin-textarea{min-height:220px;line-height:1.9}
 .admin-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.admin-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
 
-/* ADMIN BUTTONS */
-.admin-btn{padding:.6rem 1.4rem;border:1px solid;cursor:pointer;font-family:'Noto Serif KR',serif;font-size:.78rem;letter-spacing:.05em;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;background:transparent}
+/* admin buttons */
+.admin-btn{padding:.6rem 1.4rem;border:1px solid;cursor:pointer;font-family:'Noto Serif KR',serif;
+  font-size:.78rem;letter-spacing:.05em;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;background:transparent}
 .admin-btn-primary{background:linear-gradient(135deg,#1a3a7a,#2a5aaa);border-color:rgba(100,160,255,.3);color:var(--moonlight)}
 .admin-btn-primary:hover{box-shadow:0 0 16px rgba(58,123,213,.3)}
 .admin-btn-success{background:rgba(42,157,111,.14);border-color:rgba(42,157,111,.4);color:#4ec99a}
@@ -213,31 +298,55 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
 .admin-btn-danger:hover{background:rgba(192,57,43,.22)}
 .admin-btn-warn{background:rgba(224,160,32,.1);border-color:rgba(224,160,32,.3);color:var(--gold-pale)}
 .admin-btn-warn:hover{background:rgba(224,160,32,.2)}
+.admin-btn-purple{background:rgba(140,80,200,.12);border-color:rgba(140,80,200,.35);color:#c0a0f0}
+.admin-btn-purple:hover{background:rgba(140,80,200,.22)}
 .admin-btn-sm{padding:.32rem .85rem;font-size:.7rem}
 
-/* EPISODE ROWS */
+/* episode list rows */
 .admin-ep-list{display:flex;flex-direction:column;gap:1px;background:var(--border)}
-.admin-ep-row{background:var(--bg-dark);padding:1rem 1.2rem;display:flex;align-items:center;gap:1rem;transition:background .2s}
+.admin-ep-row{background:var(--bg-dark);padding:1rem 1.2rem;display:flex;align-items:center;gap:1rem;transition:background .2s;flex-wrap:wrap}
 .admin-ep-row:hover{background:var(--bg-card)}
 .admin-ep-num{font-family:'Cinzel',serif;font-size:.6rem;color:var(--text-dim);min-width:55px}
-.admin-ep-title-text{flex:1;font-size:.85rem;color:var(--text-body)}
+.admin-ep-title-text{flex:1;font-size:.85rem;color:var(--text-body);min-width:120px}
 .admin-ep-badge{font-size:.6rem;padding:.15rem .5rem;border:1px solid;border-radius:2px}
 .admin-ep-badge.pub{color:#4ec99a;border-color:rgba(78,201,154,.4);background:rgba(78,201,154,.07)}
 .admin-ep-badge.draft{color:var(--gold-pale);border-color:rgba(200,168,106,.4);background:rgba(200,168,106,.06)}
 .admin-ep-badge.plan{color:var(--text-dim);border-color:var(--border)}
-.admin-ep-actions{display:flex;gap:.4rem}
+.admin-ep-actions{display:flex;gap:.4rem;flex-shrink:0}
 
-/* ILLUST GRID */
+/* char admin grid */
+.admin-char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem}
+.admin-char-card{background:var(--bg-card);border:1px solid var(--border);overflow:hidden;transition:border-color .2s}
+.admin-char-card:hover{border-color:var(--border-bright)}
+.admin-char-img-wrap{position:relative;height:260px;background:rgba(17,34,68,.4)}
+.admin-char-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:top;filter:brightness(.8) saturate(.7);display:block}
+.admin-char-no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  color:var(--text-dim);font-size:.72rem;letter-spacing:.1em;font-family:'Cinzel',serif;flex-direction:column;gap:.5rem}
+.admin-char-img-overlay{position:absolute;top:0;left:0;right:0;bottom:0;
+  background:rgba(4,8,18,.65);display:flex;align-items:center;justify-content:center;gap:.5rem;
+  opacity:0;transition:opacity .2s}
+.admin-char-card:hover .admin-char-img-overlay{opacity:1}
+.admin-char-info{padding:1rem}
+.admin-char-role-badge{font-size:.58rem;letter-spacing:.15em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.3rem}
+.admin-char-name{font-size:.9rem;color:var(--moonlight);margin-bottom:.4rem}
+.admin-char-actions{display:flex;gap:.4rem;margin-top:.7rem}
+
+/* illust grid */
 .admin-illust-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1px;background:var(--border);margin-bottom:2rem}
 .admin-illust-item{background:var(--bg-dark);position:relative;overflow:hidden}
-.admin-illust-img{width:100%;aspect-ratio:.75;object-fit:cover;object-position:top;filter:brightness(.75) saturate(.6);display:block;transition:all .3s}
+.admin-illust-img{width:100%;aspect-ratio:.75;object-fit:cover;object-position:top;
+  filter:brightness(.75) saturate(.6);display:block;transition:all .3s}
 .admin-illust-item:hover .admin-illust-img{filter:brightness(.9) saturate(.8)}
-.admin-illust-actions{position:absolute;inset:0;background:rgba(4,8,18,.65);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;opacity:0;transition:opacity .2s}
+.admin-illust-actions{position:absolute;inset:0;background:rgba(4,8,18,.65);
+  display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
 .admin-illust-item:hover .admin-illust-actions{opacity:1}
-.admin-illust-label{position:absolute;bottom:0;left:0;right:0;padding:.4rem .6rem;font-size:.63rem;color:var(--moonlight);background:rgba(4,8,18,.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.admin-illust-label{position:absolute;bottom:0;left:0;right:0;padding:.4rem .6rem;
+  font-size:.63rem;color:var(--moonlight);background:rgba(4,8,18,.85);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* UPLOAD ZONE */
-.upload-zone{border:2px dashed var(--border-bright);padding:2.5rem;text-align:center;cursor:pointer;transition:all .3s;background:rgba(100,140,220,.02);display:block}
+/* upload zone */
+.upload-zone{border:2px dashed var(--border-bright);padding:2.5rem;text-align:center;
+  cursor:pointer;transition:all .3s;background:rgba(100,140,220,.02);display:block}
 .upload-zone:hover{border-color:var(--moonlight-dim);background:rgba(100,140,220,.05)}
 .upload-zone-icon{font-size:2rem;margin-bottom:.8rem;opacity:.5}
 .upload-zone-text{font-size:.8rem;color:var(--text-dim);line-height:1.7}
@@ -246,28 +355,42 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
 .upload-thumb{position:relative;width:80px;height:80px}
 .upload-thumb img{width:100%;height:100%;object-fit:cover;border:1px solid var(--border)}
 
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(4,6,12,.92);z-index:350;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+/* modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(4,6,12,.92);z-index:350;
+  align-items:center;justify-content:center;backdrop-filter:blur(4px)}
 .modal-overlay.open{display:flex}
-.modal-box{background:var(--bg-card);border:1px solid var(--border-bright);width:90%;max-width:740px;max-height:88vh;overflow-y:auto;padding:2rem;animation:fadeSlide .3s ease}
+.modal-box{background:var(--bg-card);border:1px solid var(--border-bright);width:90%;max-width:760px;
+  max-height:88vh;overflow-y:auto;padding:2rem;animation:fadeSlide .3s ease}
 .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
 .modal-title{font-size:1rem;color:var(--moonlight)}
-.modal-close{background:none;border:1px solid var(--border);color:var(--text-dim);width:30px;height:30px;cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close{background:none;border:1px solid var(--border);color:var(--text-dim);width:30px;height:30px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .modal-close:hover{color:var(--moonlight)}
-.modal-footer{display:flex;justify-content:flex-end;gap:.6rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.modal-footer{display:flex;justify-content:flex-end;gap:.6rem;margin-top:1.5rem;
+  padding-top:1rem;border-top:1px solid var(--border)}
 
-/* TOAST */
-.toast{position:fixed;bottom:2rem;right:2rem;z-index:400;background:var(--bg-card);border:1px solid var(--border-bright);padding:.8rem 1.5rem;font-size:.8rem;color:var(--moonlight);box-shadow:0 8px 30px rgba(0,0,0,.5);transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none;display:flex;align-items:center;gap:.6rem}
+/* char image change area in modal */
+.char-img-edit-area{display:grid;grid-template-columns:140px 1fr;gap:1.5rem;align-items:start;margin-bottom:1rem}
+.char-img-current{width:140px;height:185px;object-fit:cover;object-position:top;
+  border:1px solid var(--border-bright);display:block;filter:brightness(.85) saturate(.8)}
+.char-img-placeholder{width:140px;height:185px;background:rgba(17,34,68,.4);
+  display:flex;align-items:center;justify-content:center;font-size:.72rem;
+  color:var(--text-dim);border:1px solid var(--border);flex-direction:column;gap:.5rem}
+
+/* toast */
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:400;background:var(--bg-card);
+  border:1px solid var(--border-bright);padding:.8rem 1.5rem;font-size:.8rem;color:var(--moonlight);
+  box-shadow:0 8px 30px rgba(0,0,0,.5);transform:translateY(20px);opacity:0;
+  transition:all .3s;pointer-events:none;display:flex;align-items:center;gap:.6rem}
 .toast.show{transform:translateY(0);opacity:1}
 .toast.success{border-color:rgba(78,201,154,.4)}
 .toast.error{border-color:rgba(224,80,60,.4)}
 
-/* SCROLLBAR */
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--bg-dark)}
-::-webkit-scrollbar-thumb{background:var(--navy-light)}
-::-webkit-scrollbar-thumb:hover{background:var(--moonlight-dim)}
-.moon-deco{position:fixed;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(200,216,240,.04) 0%,transparent 70%);pointer-events:none;z-index:0}
+/* scrollbar */
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg-dark)}
+::-webkit-scrollbar-thumb{background:var(--navy-light)}::-webkit-scrollbar-thumb:hover{background:var(--moonlight-dim)}
+.moon-deco{position:fixed;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,216,240,.04) 0%,transparent 70%);pointer-events:none;z-index:0}
 </style>
 </head>
 <body>
@@ -304,17 +427,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
     </div>
     <div class="admin-grid-2">
       <div class="admin-form-row"><label class="admin-label">화수 번호</label><input class="admin-input" id="ep-num-input" type="number" placeholder="예: 1"></div>
-      <div class="admin-form-row"><label class="admin-label">공개 상태</label><select class="admin-select" id="ep-status-input"><option value="pub">공개</option><option value="draft">비공개(초안)</option><option value="plan">예정</option></select></div>
+      <div class="admin-form-row"><label class="admin-label">공개 상태</label>
+        <select class="admin-select" id="ep-status-input">
+          <option value="pub">공개</option><option value="draft">비공개(초안)</option><option value="plan">예정</option>
+        </select></div>
     </div>
     <div class="admin-form-row"><label class="admin-label">제목</label><input class="admin-input" id="ep-title-input" placeholder="에피소드 제목"></div>
-    <div class="admin-form-row"><label class="admin-label">부제 / 인트로 문장 <span>선택</span></label><input class="admin-input" id="ep-sub-input" placeholder="부제 또는 인용 문장"></div>
+    <div class="admin-form-row"><label class="admin-label">부제 <span>선택</span></label><input class="admin-input" id="ep-sub-input" placeholder="부제 또는 인용 문장"></div>
     <div class="admin-form-row">
-      <label class="admin-label">원고 <span>대화문은 "쌍따옴표" 시작 시 자동 강조 · 장면전환은 *** · 삽화 삽입은 ---ILLUST:검색어:캡션---</span></label>
-      <textarea class="admin-textarea" id="ep-body-input" rows="20" placeholder='원고를 여기에 붙여넣으세요.&#10;빈 줄로 문단을 구분합니다.&#10;&#10;예시:&#10;처형은 새벽에 집행된다.&#10;&#10;"왔군."&#10;&#10;***&#10;&#10;---ILLUST:일리아:유언 서기관 일리아---'></textarea>
+      <label class="admin-label">원고 <span>"쌍따옴표"=대화강조 · ***=장면전환 · ---ILLUST:검색어:캡션---=삽화삽입</span></label>
+      <textarea class="admin-textarea" id="ep-body-input" rows="20" placeholder='처형은 새벽에 집행된다.&#10;&#10;"왔군."&#10;&#10;***&#10;&#10;---ILLUST:일리아:일리아 로드웬---'></textarea>
     </div>
     <div class="modal-footer">
       <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="closeEpModal()">취소</button>
-      <button class="admin-btn admin-btn-primary" onclick="saveEpisode()">💾 저장하기</button>
+      <button class="admin-btn admin-btn-primary" onclick="saveEpisode()">💾 저장</button>
     </div>
   </div>
 </div>
@@ -363,10 +489,69 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
   </div>
 </div>
 
+<!-- ══════════════════════════════════════
+     CHARACTER EDIT MODAL  ← NEW
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="char-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="char-modal-title">인물 등록 / 편집</div>
+      <button class="modal-close" onclick="closeCharModal()">✕</button>
+    </div>
+
+    <!-- Image change section -->
+    <div class="admin-card-title" style="margin-bottom:1rem">캐릭터 삽화</div>
+    <div class="char-img-edit-area" id="char-img-edit-area">
+      <div id="char-modal-img-wrap">
+        <div class="char-img-placeholder" id="char-modal-img-placeholder">
+          <span style="font-size:1.5rem;opacity:.4">👤</span>
+          <span>이미지 없음</span>
+        </div>
+        <img id="char-modal-img-preview" class="char-img-current" style="display:none" src="" alt="">
+      </div>
+      <div>
+        <label class="admin-label">캐릭터 이미지 <span>선택</span></label>
+        <label class="upload-zone" for="char-img-file" style="padding:1.5rem">
+          <div class="upload-zone-icon" style="font-size:1.5rem">🖼</div>
+          <div class="upload-zone-text">클릭하여 이미지 변경<br><small style="opacity:.6">PNG · JPG · WEBP</small></div>
+          <input type="file" id="char-img-file" accept="image/*" onchange="previewCharImg(this)">
+        </label>
+        <p style="font-size:.7rem;color:var(--text-dim);margin-top:.6rem;line-height:1.6">이미지를 선택하지 않으면<br>기존 이미지가 유지됩니다.</p>
+      </div>
+    </div>
+
+    <div class="admin-card-title" style="margin-bottom:1rem;margin-top:1.5rem">기본 정보</div>
+    <div class="admin-grid-2">
+      <div class="admin-form-row"><label class="admin-label">이름</label><input class="admin-input" id="char-name-input" placeholder="예: 일리아 로드웬"></div>
+      <div class="admin-form-row"><label class="admin-label">역할 레이블 <span>영문</span></label><input class="admin-input" id="char-role-input" placeholder="예: HEROINE · 여주인공"></div>
+    </div>
+    <div class="admin-form-row"><label class="admin-label">한 줄 소개 <span>카드에 표시</span></label><input class="admin-input" id="char-short-input" placeholder="예: 왕립 감옥의 유언 서기관"></div>
+    <div class="admin-form-row"><label class="admin-label">상세 프로필 설명</label><textarea class="admin-textarea" id="char-desc-input" rows="5" style="min-height:100px" placeholder="클릭하면 펼쳐지는 상세 설명을 입력하세요."></textarea></div>
+    <div class="admin-form-row">
+      <label class="admin-label">특성 태그 <span>쉼표(,)로 구분</span></label>
+      <input class="admin-input" id="char-traits-input" placeholder="예: 왕립 유언 서기관,길잡이,도망 여주,절제된 성격">
+    </div>
+    <div class="admin-form-row">
+      <label class="admin-label">홈 미리보기 표시</label>
+      <select class="admin-select" id="char-home-input">
+        <option value="yes">홈에 표시</option>
+        <option value="no">홈에 표시 안 함</option>
+      </select>
+    </div>
+
+    <div class="modal-footer">
+      <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="closeCharModal()">취소</button>
+      <button class="admin-btn admin-btn-primary" onclick="saveChar()">💾 저장</button>
+    </div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- NAV -->
+<!-- ════════════════════════════════════
+     NAV
+════════════════════════════════════ -->
 <nav>
   <div class="nav-logo" onclick="gotoHome()">VERDORE CASTLE</div>
   <ul class="nav-tabs" id="main-nav">
@@ -380,53 +565,49 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
   <button class="nav-admin-btn" id="nav-admin-btn" onclick="openAdminLogin()">⚙ 관리자</button>
 </nav>
 
-<!-- HOME -->
+<!-- ════════════════════════════════════
+     HOME
+════════════════════════════════════ -->
 <div class="page active" id="page-home">
   <div class="home-hero">
     <div class="home-cover-wrap">
       <div class="cover-glow"></div>
-      <img class="home-cover" id="home-cover-img" src="/mnt/user-data/uploads/책표지.PNG" alt="책 표지">
+      <img class="home-cover" id="home-cover-img" src="" alt="책 표지" style="display:none">
     </div>
     <div class="home-info">
-      <div class="home-genre-tags" id="home-tags"><span class="tag">로맨스판타지</span><span class="tag">피폐</span><span class="tag">고딕 미스터리</span><span class="tag">집착남</span><span class="tag">15세</span></div>
-      <h1 class="home-title" id="home-title">죽은 남편의 성은<br>나를 놓아주지 않는다</h1>
-      <p class="home-logline" id="home-logline">사형수의 마지막 소원을 기록했다가 죽은 공작의 아내가 된 서기관 일리아. 혼인무효를 위해 찾아간 성에서, 그녀는 죽은 줄 알았던 남편이 불완전한 몸으로 부활해 있다는 사실을 알게 된다.</p>
+      <div class="home-genre-tags" id="home-tags"></div>
+      <h1 class="home-title" id="home-title"></h1>
+      <p class="home-logline" id="home-logline"></p>
       <div><div class="home-synopsis-label">SYNOPSIS</div></div>
-      <p class="home-synopsis" id="home-synopsis">왕립 감옥의 유언 서기관 일리아 로드웬은 사형수 카엘 베르도어의 마지막 소원 때문에 그의 아내로 기록된다. 카엘은 처형당하지만, 일리아가 혼인무효를 위해 찾아간 베르도어 성에서 불완전하게 부활한다.<br><br>베르도어 성은 안주인이 없어 미로처럼 뒤틀린 성이며, 일리아는 그 성에서 유일하게 길을 찾을 수 있는 길잡이다. 카엘은 일리아를 다시 만나기 위해 스스로 죽음을 선택했고, 이후에도 그녀가 떠나려 할 때마다 죽음을 미끼로 그녀를 성으로 부른다.</p>
-      <div class="keyword-wrap" id="home-keywords"><span class="keyword">사형수남편</span><span class="keyword">미로성</span><span class="keyword">집착남</span><span class="keyword">길잡이여주</span><span class="keyword">부활</span><span class="keyword">혼인무효</span><span class="keyword">쌍방집착</span><span class="keyword">고딕로판</span></div>
+      <p class="home-synopsis" id="home-synopsis"></p>
+      <div class="keyword-wrap" id="home-keywords"></div>
       <a class="home-cta" href="#" onclick="showPage('viewer',document.querySelectorAll('.nav-tabs a')[3]);return false">→ 1화부터 읽기</a>
     </div>
   </div>
   <div class="divider-ornament"><span class="ornament-symbol">✦ ✦ ✦</span></div>
-  <div style="max-width:1100px;margin:0 auto;padding:0 2rem 5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)">
-    <div style="background:var(--bg-dark);padding:1.5rem;display:flex;align-items:center;gap:1rem;cursor:pointer" onclick="showPage('characters',document.querySelectorAll('.nav-tabs a')[1])"><img src="/mnt/user-data/uploads/일리아.PNG" style="width:60px;height:80px;object-fit:cover;object-position:top;filter:brightness(.8) saturate(.7)"><div><div style="font-size:.6rem;letter-spacing:.15em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.3rem">HEROINE</div><div style="font-size:.9rem;color:var(--moonlight)">일리아 로드웬</div><div style="font-size:.72rem;color:var(--text-dim);margin-top:.2rem">왕립 감옥의 유언 서기관</div></div></div>
-    <div style="background:var(--bg-dark);padding:1.5rem;display:flex;align-items:center;gap:1rem;cursor:pointer" onclick="showPage('characters',document.querySelectorAll('.nav-tabs a')[1])"><img src="/mnt/user-data/uploads/카엘.PNG" style="width:60px;height:80px;object-fit:cover;object-position:top;filter:brightness(.8) saturate(.7)"><div><div style="font-size:.6rem;letter-spacing:.15em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.3rem">MALE LEAD</div><div style="font-size:.9rem;color:var(--moonlight)">카엘 베르도어</div><div style="font-size:.72rem;color:var(--text-dim);margin-top:.2rem">베르도어 가문의 공작</div></div></div>
-    <div style="background:var(--bg-dark);padding:1.5rem;display:flex;align-items:center;gap:1rem;cursor:pointer" onclick="showPage('characters',document.querySelectorAll('.nav-tabs a')[1])"><img src="/mnt/user-data/uploads/에른.PNG" style="width:60px;height:80px;object-fit:cover;object-position:top;filter:brightness(.8) saturate(.7)"><div><div style="font-size:.6rem;letter-spacing:.15em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.3rem">MALE SUPPORT</div><div style="font-size:.9rem;color:var(--moonlight)">에른</div><div style="font-size:.72rem;color:var(--text-dim);margin-top:.2rem">서브 남주</div></div></div>
-  </div>
+  <div class="home-chars-preview" id="home-chars-preview"></div>
 </div>
 
-<!-- CHARACTERS -->
+<!-- ════════════════════════════════════
+     CHARACTERS (public — dynamic)
+════════════════════════════════════ -->
 <div class="page" id="page-characters">
   <div class="section-header"><div class="section-title">CHARACTERS</div><div class="section-title-kr">등장인물</div></div>
-  <div class="char-grid">
-    <div class="char-card" onclick="toggleChar('char-illia')"><div class="char-img-wrap"><img src="/mnt/user-data/uploads/일리아.PNG" alt="일리아"><div class="char-img-overlay"></div></div><div class="char-info"><div class="char-role">HEROINE · 여주인공</div><div class="char-name">일리아 로드웬</div><div class="char-desc">왕립 감옥의 유언 서기관. 카엘의 소원으로 인해 그의 아내로 기록되었다.</div></div></div>
-    <div class="char-card" onclick="toggleChar('char-kael')"><div class="char-img-wrap"><img src="/mnt/user-data/uploads/카엘.PNG" alt="카엘"><div class="char-img-overlay"></div></div><div class="char-info"><div class="char-role">MALE LEAD · 남주인공</div><div class="char-name">카엘 베르도어</div><div class="char-desc">베르도어 가문의 공작. 처형 직전 일리아를 아내로 기록하게 하고, 이후 불완전한 몸으로 부활한다.</div></div></div>
-    <div class="char-card" onclick="toggleChar('char-ern')"><div class="char-img-wrap"><img src="/mnt/user-data/uploads/에른.PNG" alt="에른"><div class="char-img-overlay"></div></div><div class="char-info"><div class="char-role">MALE SUPPORT · 서브 남주</div><div class="char-name">에른</div><div class="char-desc">금발에 서늘한 눈빛을 가진 인물. 일리아와 얽힌 복잡한 관계를 지닌다.</div></div></div>
-    <div class="char-card" onclick="toggleChar('char-bail')"><div class="char-img-wrap"><img src="/mnt/user-data/uploads/바일.PNG" alt="바일"><div class="char-img-overlay"></div></div><div class="char-info"><div class="char-role">SUPPORTING · 조연</div><div class="char-name">바일</div><div class="char-desc">안경을 쓴 단정한 외모의 인물. 베르도어 성과 관련된 비밀을 알고 있다.</div></div></div>
-  </div>
-  <div class="char-detail-panel" id="char-illia"><div style="font-size:.65rem;letter-spacing:.2em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.5rem">CHARACTER PROFILE</div><div style="font-size:1.3rem;color:var(--moonlight);margin-bottom:1rem">일리아 로드웬</div><p style="font-size:.85rem;line-height:2;color:var(--text-body)">왕립 감옥에서 사형수의 마지막 유언을 기록하는 서기관. 평온하고 절제된 성격을 지녔으나, 타인의 고통을 외면하지 못하는 약점이 있다. 베르도어 성에서 유일하게 길을 찾을 수 있는 존재.</p><ul class="char-trait-list"><li>왕립 유언 서기관</li><li>길잡이</li><li>도망 여주</li><li>절제된 성격</li></ul></div>
-  <div class="char-detail-panel" id="char-kael"><div style="font-size:.65rem;letter-spacing:.2em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.5rem">CHARACTER PROFILE</div><div style="font-size:1.3rem;color:var(--moonlight);margin-bottom:1rem">카엘 베르도어</div><p style="font-size:.85rem;line-height:2;color:var(--text-body)">베르도어 가문의 공작. 처형 직전 일리아를 아내로 기록하게 하였다. 이후 불완전한 몸으로 부활하여 일리아를 붙잡기 위해 죽음을 반복하는 집착적인 면모를 지닌다.</p><ul class="char-trait-list"><li>베르도어 공작</li><li>불완전한 부활</li><li>집착남</li><li>쌍방집착</li></ul></div>
-  <div class="char-detail-panel" id="char-ern"><div style="font-size:.65rem;letter-spacing:.2em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.5rem">CHARACTER PROFILE</div><div style="font-size:1.3rem;color:var(--moonlight);margin-bottom:1rem">에른</div><p style="font-size:.85rem;line-height:2;color:var(--text-body)">서브 남주인공. 금발에 서늘하고 예리한 눈빛. 일리아와 복잡하게 얽힌 과거를 가지고 있으며, 그녀가 베르도어 성에서 벗어나도록 돕고자 한다.</p><ul class="char-trait-list"><li>서브 남주</li><li>금발</li><li>복잡한 과거</li></ul></div>
-  <div class="char-detail-panel" id="char-bail"><div style="font-size:.65rem;letter-spacing:.2em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.5rem">CHARACTER PROFILE</div><div style="font-size:1.3rem;color:var(--moonlight);margin-bottom:1rem">바일</div><p style="font-size:.85rem;line-height:2;color:var(--text-body)">안경을 쓴 단정하고 냉정한 외모의 인물. 베르도어 성의 비밀과 깊이 연관되어 있으며, 카엘의 과거와 얽힌 존재이다.</p><ul class="char-trait-list"><li>안경</li><li>성의 비밀</li><li>냉정한 태도</li></ul></div>
+  <div class="char-grid" id="public-char-grid"></div>
+  <div id="public-char-panels" style="padding:0 2rem 4rem;max-width:1100px;margin:0 auto"></div>
 </div>
 
-<!-- CONTENTS -->
+<!-- ════════════════════════════════════
+     CONTENTS
+════════════════════════════════════ -->
 <div class="page" id="page-contents">
   <div class="section-header"><div class="section-title">TABLE OF CONTENTS</div><div class="section-title-kr">목차</div></div>
   <div class="contents-wrap" id="public-ep-list"></div>
 </div>
 
-<!-- VIEWER -->
+<!-- ════════════════════════════════════
+     VIEWER
+════════════════════════════════════ -->
 <div class="page" id="page-viewer">
   <div class="viewer-controls">
     <div class="viewer-ep-info" id="viewer-ep-info">—</div>
@@ -438,20 +619,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
   <div class="viewer-content" id="viewer-content"></div>
 </div>
 
-<!-- GALLERY -->
+<!-- ════════════════════════════════════
+     GALLERY
+════════════════════════════════════ -->
 <div class="page" id="page-gallery">
   <div class="section-header"><div class="section-title">ILLUSTRATIONS</div><div class="section-title-kr">삽화 갤러리</div></div>
   <div class="gallery-grid" id="public-gallery"></div>
 </div>
 
-<!-- REVIEWS -->
+<!-- ════════════════════════════════════
+     REVIEWS
+════════════════════════════════════ -->
 <div class="page" id="page-reviews">
   <div class="section-header"><div class="section-title">READER REVIEWS</div><div class="section-title-kr">독자 리뷰</div></div>
   <div class="reviews-wrap">
     <div class="review-form-section">
       <div class="review-form-title">LEAVE A REVIEW — 리뷰 남기기</div>
       <div class="form-row"><label class="form-label">닉네임</label><input class="form-input" id="r-name" placeholder="독자 이름"></div>
-      <div class="form-row"><label class="form-label">별점</label><div class="star-select" id="star-select"><span onclick="setStar(1)">★</span><span onclick="setStar(2)">★</span><span onclick="setStar(3)">★</span><span onclick="setStar(4)">★</span><span onclick="setStar(5)">★</span></div></div>
+      <div class="form-row"><label class="form-label">별점</label>
+        <div class="star-select" id="star-select">
+          <span onclick="setStar(1)">★</span><span onclick="setStar(2)">★</span>
+          <span onclick="setStar(3)">★</span><span onclick="setStar(4)">★</span><span onclick="setStar(5)">★</span>
+        </div></div>
       <div class="form-row"><label class="form-label">리뷰</label><textarea class="form-textarea" id="r-body" rows="4" placeholder="감상을 자유롭게 남겨주세요."></textarea></div>
       <button class="form-submit" onclick="submitReview()">리뷰 등록</button>
     </div>
@@ -459,13 +648,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
   </div>
 </div>
 
-<!-- ADMIN -->
+<!-- ════════════════════════════════════
+     ADMIN
+════════════════════════════════════ -->
 <div class="page" id="page-admin">
   <div class="admin-layout">
     <aside class="admin-sidebar">
       <div class="admin-sidebar-title">ADMIN PANEL</div>
       <div class="admin-nav-item active" onclick="showAdminSec('dash',this)"><span class="admin-nav-icon">📊</span>대시보드</div>
       <div class="admin-nav-item" onclick="showAdminSec('home-edit',this)"><span class="admin-nav-icon">🏠</span>홈 편집</div>
+      <div class="admin-nav-item" onclick="showAdminSec('characters-admin',this)"><span class="admin-nav-icon">👤</span>인물 관리<span class="admin-badge" id="char-badge">0</span></div>
       <div class="admin-nav-item" onclick="showAdminSec('episodes',this)"><span class="admin-nav-icon">📖</span>에피소드 관리<span class="admin-badge" id="ep-badge">0</span></div>
       <div class="admin-nav-item" onclick="showAdminSec('illustrations',this)"><span class="admin-nav-icon">🖼</span>삽화 관리<span class="admin-badge" id="illust-badge">0</span></div>
       <div class="admin-nav-item" onclick="showAdminSec('rev-admin',this)"><span class="admin-nav-icon">💬</span>리뷰 관리<span class="admin-badge" id="rev-badge">0</span></div>
@@ -473,12 +665,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
         <button class="admin-btn admin-btn-danger" style="width:100%;justify-content:center" onclick="adminLogout()">로그아웃</button>
       </div>
     </aside>
+
     <main class="admin-main">
 
       <!-- DASHBOARD -->
       <div class="admin-section active" id="admin-dash">
         <div class="admin-section-header"><div><div class="admin-section-title">대시보드</div><div class="admin-section-sub">베르도어 성 관리 현황</div></div></div>
         <div class="admin-stat-grid">
+          <div class="admin-stat-card"><div class="admin-stat-label">CHARACTERS</div><div class="admin-stat-value" id="stat-char">0</div><div class="admin-stat-note">등록 인물</div></div>
           <div class="admin-stat-card"><div class="admin-stat-label">EPISODES</div><div class="admin-stat-value" id="stat-ep">0</div><div class="admin-stat-note">전체 화수</div></div>
           <div class="admin-stat-card"><div class="admin-stat-label">PUBLISHED</div><div class="admin-stat-value" id="stat-pub">0</div><div class="admin-stat-note">공개 화수</div></div>
           <div class="admin-stat-card"><div class="admin-stat-label">ILLUSTRATIONS</div><div class="admin-stat-value" id="stat-illust">0</div><div class="admin-stat-note">등록 삽화</div></div>
@@ -487,10 +681,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
         <div class="admin-card">
           <div class="admin-card-title">빠른 작업</div>
           <div style="display:flex;flex-wrap:wrap;gap:.7rem">
+            <button class="admin-btn admin-btn-purple" onclick="openNewCharModal()">＋ 인물 추가</button>
             <button class="admin-btn admin-btn-primary" onclick="openNewEpModal()">＋ 새 에피소드</button>
             <button class="admin-btn admin-btn-success" onclick="openIllustModal()">＋ 삽화 업로드</button>
             <button class="admin-btn admin-btn-warn" onclick="document.getElementById('cover-modal').classList.add('open')">📖 표지 변경</button>
-            <button class="admin-btn admin-btn-warn" onclick="showAdminSec('home-edit',document.querySelectorAll('.admin-nav-item')[1])">✏ 홈 정보 수정</button>
+            <button class="admin-btn admin-btn-warn" onclick="showAdminSec('home-edit',document.querySelectorAll('.admin-nav-item')[1])">✏ 홈 수정</button>
           </div>
         </div>
         <div class="admin-card"><div class="admin-card-title">최근 에피소드</div><div id="dash-recent"></div></div>
@@ -504,17 +699,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
         </div>
         <div class="admin-card">
           <div class="admin-card-title">표지 이미지</div>
-          <div style="display:flex;align-items:center;gap:1.5rem"><img id="admin-cover-preview" src="/mnt/user-data/uploads/책표지.PNG" style="width:90px;border:1px solid var(--border-bright)"><button class="admin-btn admin-btn-warn" onclick="document.getElementById('cover-modal').classList.add('open')">📖 표지 변경</button></div>
+          <div style="display:flex;align-items:center;gap:1.5rem">
+            <img id="admin-cover-preview" src="" style="width:90px;border:1px solid var(--border-bright);display:none">
+            <button class="admin-btn admin-btn-warn" onclick="document.getElementById('cover-modal').classList.add('open')">📖 표지 변경</button>
+          </div>
         </div>
         <div class="admin-card">
           <div class="admin-card-title">작품 기본 정보</div>
-          <div class="admin-form-row"><label class="admin-label">제목</label><input class="admin-input" id="edit-title" value="죽은 남편의 성은 나를 놓아주지 않는다"></div>
-          <div class="admin-form-row"><label class="admin-label">한 줄 소개 (로그라인)</label><textarea class="admin-textarea" id="edit-logline" rows="3" style="min-height:80px">사형수의 마지막 소원을 기록했다가 죽은 공작의 아내가 된 서기관 일리아. 혼인무효를 위해 찾아간 성에서, 그녀는 죽은 줄 알았던 남편이 불완전한 몸으로 부활해 있다는 사실을 알게 된다.</textarea></div>
-          <div class="admin-form-row"><label class="admin-label">시놉시스</label><textarea class="admin-textarea" id="edit-synopsis" rows="7">왕립 감옥의 유언 서기관 일리아 로드웬은 사형수 카엘 베르도어의 마지막 소원 때문에 그의 아내로 기록된다. 카엘은 처형당하지만, 일리아가 혼인무효를 위해 찾아간 베르도어 성에서 불완전하게 부활한다.
+          <div class="admin-form-row"><label class="admin-label">제목</label><input class="admin-input" id="edit-title"></div>
+          <div class="admin-form-row"><label class="admin-label">한 줄 소개 (로그라인)</label><textarea class="admin-textarea" id="edit-logline" rows="3" style="min-height:80px"></textarea></div>
+          <div class="admin-form-row"><label class="admin-label">시놉시스</label><textarea class="admin-textarea" id="edit-synopsis" rows="7"></textarea></div>
+          <div class="admin-form-row"><label class="admin-label">장르 태그 <span>쉼표(,)로 구분</span></label><input class="admin-input" id="edit-tags"></div>
+          <div class="admin-form-row"><label class="admin-label">키워드 해시태그 <span>쉼표(,)로 구분</span></label><input class="admin-input" id="edit-keywords"></div>
+        </div>
+      </div>
 
-베르도어 성은 안주인이 없어 미로처럼 뒤틀린 성이며, 일리아는 그 성에서 유일하게 길을 찾을 수 있는 길잡이다. 카엘은 일리아를 다시 만나기 위해 스스로 죽음을 선택했고, 이후에도 그녀가 떠나려 할 때마다 죽음을 미끼로 그녀를 성으로 부른다.</textarea></div>
-          <div class="admin-form-row"><label class="admin-label">장르 태그 <span>쉼표(,)로 구분</span></label><input class="admin-input" id="edit-tags" value="로맨스판타지,피폐,고딕 미스터리,집착남,15세"></div>
-          <div class="admin-form-row"><label class="admin-label">키워드 해시태그 <span>쉼표(,)로 구분</span></label><input class="admin-input" id="edit-keywords" value="사형수남편,미로성,집착남,길잡이여주,부활,혼인무효,쌍방집착,고딕로판"></div>
+      <!-- CHARACTERS ADMIN ← NEW SECTION -->
+      <div class="admin-section" id="admin-characters-admin">
+        <div class="admin-section-header">
+          <div><div class="admin-section-title">인물 관리</div><div class="admin-section-sub">등장인물 추가 · 편집 · 삽화 변경 · 삭제</div></div>
+          <button class="admin-btn admin-btn-purple" onclick="openNewCharModal()">＋ 인물 추가</button>
+        </div>
+        <div class="admin-char-grid" id="admin-char-grid"></div>
+        <div class="admin-card" style="margin-top:1rem">
+          <div class="admin-card-title">💡 인물 관리 안내</div>
+          <p style="font-size:.78rem;color:var(--text-dim);line-height:1.9">
+            • 인물 카드의 <strong style="color:var(--moonlight)">편집</strong> 버튼으로 이름, 역할, 소개, 특성 태그, 삽화를 수정할 수 있습니다.<br>
+            • <strong style="color:var(--moonlight)">삽화 변경</strong>으로 캐릭터 이미지를 업로드하면 인물 페이지와 홈 미리보기에 즉시 반영됩니다.<br>
+            • 순서는 등록 순서로 표시됩니다. 홈 표시 여부도 각 인물별로 설정 가능합니다.
+          </p>
         </div>
       </div>
 
@@ -546,15 +759,46 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(1
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════
+     SCRIPT
+═══════════════════════════════════════════════ -->
 <script>
-// ─── DATA ────────────────────────────────────
 const ADMIN_PW='verdore89';
-let isAdmin=false,currentEpIdx=0,editingEpId=null,pendingIllustFile=null,pendingCoverFile=null,currentStar=0;
+let isAdmin=false,currentEpIdx=0,editingEpId=null,editingCharId=null;
+let pendingIllustFile=null,pendingCoverFile=null,pendingCharImgFile=null,currentStar=0;
 
+/* ═══ DEFAULT DATA ═══ */
 let D={
-  coverSrc:'/mnt/user-data/uploads/책표지.PNG',
-  home:{title:'죽은 남편의 성은\n나를 놓아주지 않는다',logline:'사형수의 마지막 소원을 기록했다가 죽은 공작의 아내가 된 서기관 일리아. 혼인무효를 위해 찾아간 성에서, 그녀는 죽은 줄 알았던 남편이 불완전한 몸으로 부활해 있다는 사실을 알게 된다.',synopsis:'왕립 감옥의 유언 서기관 일리아 로드웬은 사형수 카엘 베르도어의 마지막 소원 때문에 그의 아내로 기록된다. 카엘은 처형당하지만, 일리아가 혼인무효를 위해 찾아간 베르도어 성에서 불완전하게 부활한다.\n\n베르도어 성은 안주인이 없어 미로처럼 뒤틀린 성이며, 일리아는 그 성에서 유일하게 길을 찾을 수 있는 길잡이다.',tags:['로맨스판타지','피폐','고딕 미스터리','집착남','15세'],keywords:['사형수남편','미로성','집착남','길잡이여주','부활','혼인무효','쌍방집착','고딕로판']},
-  episodes:[{id:1,num:1,title:'마지막 소원',sub:'"당신의 마지막 말을 기록하는 것이 내 임무입니다. 그러나 이것만은 기록할 수 없습니다."',status:'pub',body:`처형은 새벽에 집행된다.
+  coverSrc:'',
+  home:{
+    title:'죽은 남편의 성은\n나를 놓아주지 않는다',
+    logline:'사형수의 마지막 소원을 기록했다가 죽은 공작의 아내가 된 서기관 일리아. 혼인무효를 위해 찾아간 성에서, 그녀는 죽은 줄 알았던 남편이 불완전한 몸으로 부활해 있다는 사실을 알게 된다.',
+    synopsis:'왕립 감옥의 유언 서기관 일리아 로드웬은 사형수 카엘 베르도어의 마지막 소원 때문에 그의 아내로 기록된다. 카엘은 처형당하지만, 일리아가 혼인무효를 위해 찾아간 베르도어 성에서 불완전하게 부활한다.\n\n베르도어 성은 안주인이 없어 미로처럼 뒤틀린 성이며, 일리아는 그 성에서 유일하게 길을 찾을 수 있는 길잡이다. 카엘은 일리아를 다시 만나기 위해 스스로 죽음을 선택했고, 이후에도 그녀가 떠나려 할 때마다 죽음을 미끼로 그녀를 성으로 부른다.',
+    tags:['로맨스판타지','피폐','고딕 미스터리','집착남','15세'],
+    keywords:['사형수남편','미로성','집착남','길잡이여주','부활','혼인무효','쌍방집착','고딕로판']
+  },
+  characters:[
+    {id:101,name:'일리아 로드웬',role:'HEROINE · 여주인공',short:'왕립 감옥의 유언 서기관',
+     desc:'왕립 감옥에서 사형수의 마지막 유언을 기록하는 서기관. 평온하고 절제된 성격을 지녔으나, 타인의 고통을 외면하지 못하는 약점이 있다. 베르도어 성에서 유일하게 길을 찾을 수 있는 존재.',
+     traits:['왕립 유언 서기관','길잡이','도망 여주','절제된 성격'],
+     imgSrc:'',showHome:'yes'},
+    {id:102,name:'카엘 베르도어',role:'MALE LEAD · 남주인공',short:'베르도어 가문의 공작',
+     desc:'베르도어 가문의 공작. 처형 직전 일리아를 아내로 기록하게 하였다. 이후 불완전한 몸으로 부활하여 일리아를 붙잡기 위해 죽음을 반복하는 집착적인 면모를 지닌다.',
+     traits:['베르도어 공작','불완전한 부활','집착남','쌍방집착'],
+     imgSrc:'',showHome:'yes'},
+    {id:103,name:'에른',role:'MALE SUPPORT · 서브 남주',short:'서브 남주',
+     desc:'서브 남주인공. 금발에 서늘하고 예리한 눈빛. 일리아와 복잡하게 얽힌 과거를 가지고 있으며, 그녀가 베르도어 성에서 벗어나도록 돕고자 한다.',
+     traits:['서브 남주','금발','복잡한 과거'],
+     imgSrc:'',showHome:'yes'},
+    {id:104,name:'바일',role:'SUPPORTING · 조연',short:'베르도어 성과 얽힌 조연',
+     desc:'안경을 쓴 단정하고 냉정한 외모의 인물. 베르도어 성의 비밀과 깊이 연관되어 있으며, 카엘의 과거와 얽힌 존재이다.',
+     traits:['안경','성의 비밀','냉정한 태도'],
+     imgSrc:'',showHome:'no'}
+  ],
+  episodes:[{id:1,num:1,title:'마지막 소원',
+    sub:'"당신의 마지막 말을 기록하는 것이 내 임무입니다. 그러나 이것만은 기록할 수 없습니다."',
+    status:'pub',
+    body:`처형은 새벽에 집행된다.
 
 왕립 감옥의 유언 서기관 일리아 로드웬은 그 사실을 너무나 잘 알고 있었다. 그녀가 처음 이 직책을 맡은 날부터 지금까지, 단 한 번도 예외는 없었다. 새벽 다섯 시, 첫 번째 종이 울리면 그녀는 양피지와 잉크를 들고 사형수의 독방으로 향했다.
 
@@ -591,14 +835,63 @@ let D={
 ---ILLUST:카엘:베르도어 공작, 카엘 베르도어---
 
 ***`}],
-  illustrations:[{id:1,src:'/mnt/user-data/uploads/책표지.PNG',caption:'표지 — 두 사람'},{id:2,src:'/mnt/user-data/uploads/일리아.PNG',caption:'일리아 로드웬'},{id:3,src:'/mnt/user-data/uploads/카엘.PNG',caption:'카엘 베르도어'},{id:4,src:'/mnt/user-data/uploads/에른.PNG',caption:'에른'},{id:5,src:'/mnt/user-data/uploads/바일.PNG',caption:'바일'},{id:6,src:'/mnt/user-data/uploads/베르도어성1.PNG',caption:'베르도어 성 — 회랑'},{id:7,src:'/mnt/user-data/uploads/베르도어성2.PNG',caption:'베르도어 성 — 외관'}],
-  reviews:[{id:1,author:'달빛독자',stars:5,body:'1화부터 심장이 철렁했습니다. 마지막 소원이 결혼이라니. 빨리 2화가 읽고 싶습니다.',date:'2026.05.01'},{id:2,author:'미로속의밤',stars:5,body:'고딕 로판 특유의 분위기가 완벽합니다. 미로 성 설정이 너무 신선해요!',date:'2026.05.03'},{id:3,author:'집착남수집가',stars:4,body:'죽음을 미끼로 여주를 붙잡는다는 설정 — 드디어 납득 가는 집착남이 등장했습니다. 다음 화 빨리요!',date:'2026.05.07'}]
+  illustrations:[],
+  reviews:[
+    {id:1,author:'달빛독자',stars:5,body:'1화부터 심장이 철렁했습니다. 마지막 소원이 결혼이라니. 빨리 2화가 읽고 싶습니다.',date:'2026.05.01'},
+    {id:2,author:'미로속의밤',stars:5,body:'고딕 로판 특유의 분위기가 완벽합니다. 미로 성 설정이 너무 신선해요!',date:'2026.05.03'},
+    {id:3,author:'집착남수집가',stars:4,body:'죽음을 미끼로 여주를 붙잡는다는 설정 — 납득 가는 집착남! 다음 화 빨리요!',date:'2026.05.07'}
+  ]
 };
 
-function save(){try{localStorage.setItem('vd',JSON.stringify(D))}catch(e){}}
-function load(){try{const s=localStorage.getItem('vd');if(s)D=JSON.parse(s)}catch(e){}}
+/* ═══ GITHUB CONFIG ═══ */
+const GH_USER  = 'ozoleefilm';
+const GH_REPO  = 'verdore-site';
+const GH_FILE  = 'data.json';
+const GH_TOKEN = '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';
+const GH_API   = `https://api.github.com/repos/${GH_USER}/${GH_REPO}/contents/${GH_FILE}`;
+let ghSHA = '';
 
-// ─── AUTH ────────────────────────────────────
+/* ═══ LOAD — GitHub에서 데이터 읽기 ═══ */
+async function load(){
+  showLoader(true);
+  try {
+    const res = await fetch(GH_API + '?t=' + Date.now(), {
+      headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'}
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const j = await res.json();
+    ghSHA = j.sha;
+    const parsed = JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,'')))));
+    if(parsed && Object.keys(parsed).length > 0) D = Object.assign({}, D, parsed);
+  } catch(e){ console.warn('GitHub 불러오기 실패 (기본값 사용):', e.message); }
+  showLoader(false);
+}
+
+/* ═══ SAVE — GitHub에 데이터 쓰기 ═══ */
+async function save(){
+  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(D, null, 2))));
+  try {
+    const res = await fetch(GH_API, {
+      method:'PUT',
+      headers:{'Authorization':'token '+GH_TOKEN,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},
+      body: JSON.stringify({message:'사이트 데이터 업데이트 '+new Date().toLocaleString('ko-KR'), content:encoded, sha:ghSHA})
+    });
+    if(!res.ok){ const e=await res.json(); throw new Error(e.message); }
+    const j = await res.json();
+    ghSHA = j.content.sha;
+    return true;
+  } catch(e){
+    console.error('GitHub 저장 실패:', e);
+    showToast('저장 실패: '+e.message,'error');
+    return false;
+  }
+}
+
+function showLoader(on){
+  document.getElementById('gh-loader').style.display = on ? 'flex' : 'none';
+}
+
+/* ═══ AUTH ═══ */
 function openAdminLogin(){
   if(isAdmin){showPage('admin',null);clearNavActive();return}
   document.getElementById('admin-login-overlay').classList.add('open');
@@ -610,30 +903,25 @@ function closeAdminLogin(){document.getElementById('admin-login-overlay').classL
 function tryAdminLogin(){
   const pw=document.getElementById('admin-pw').value;
   if(pw===ADMIN_PW){
-    isAdmin=true;
-    closeAdminLogin();
+    isAdmin=true;closeAdminLogin();
     const btn=document.getElementById('nav-admin-btn');
     btn.classList.add('on');btn.textContent='⚙ 관리자 ✓';
-    showPage('admin',null);clearNavActive();
-    refreshAdmin();
+    showPage('admin',null);clearNavActive();refreshAdmin();
     showToast('관리자 모드로 입장했습니다','success');
   }else{
     document.getElementById('admin-login-error').textContent='비밀번호가 올바르지 않습니다.';
-    document.getElementById('admin-pw').value='';
-    document.getElementById('admin-pw').focus();
+    document.getElementById('admin-pw').value='';document.getElementById('admin-pw').focus();
   }
 }
 function adminLogout(){
   isAdmin=false;
-  const btn=document.getElementById('nav-admin-btn');
-  btn.classList.remove('on');btn.textContent='⚙ 관리자';
-  showPage('home',null);
-  document.querySelectorAll('.nav-tabs a')[0].classList.add('active');
+  const btn=document.getElementById('nav-admin-btn');btn.classList.remove('on');btn.textContent='⚙ 관리자';
+  showPage('home',null);document.querySelectorAll('.nav-tabs a')[0].classList.add('active');
   showToast('로그아웃 되었습니다');
 }
 function togglePwVis(){const i=document.getElementById('admin-pw');i.type=i.type==='password'?'text':'password'}
 
-// ─── NAVIGATION ─────────────────────────────
+/* ═══ NAV ═══ */
 function gotoHome(){showPage('home',null);document.querySelectorAll('.nav-tabs a')[0].classList.add('active')}
 function clearNavActive(){document.querySelectorAll('.nav-tabs a').forEach(a=>a.classList.remove('active'))}
 function showPage(name,el){
@@ -641,93 +929,350 @@ function showPage(name,el){
   clearNavActive();
   document.getElementById('page-'+name).classList.add('active');
   if(el&&el.classList)el.classList.add('active');
+  if(name==='characters')renderPublicChars();
   if(name==='contents')renderEpList();
   if(name==='gallery')renderGallery();
   if(name==='viewer')renderViewer(currentEpIdx);
   if(name==='reviews')renderReviews();
 }
 
-// ─── PUBLIC RENDERS ──────────────────────────
+/* ═══════════════════════════════
+   PUBLIC RENDER — CHARACTERS
+═══════════════════════════════ */
+function renderPublicChars(){
+  const grid=document.getElementById('public-char-grid');
+  const panels=document.getElementById('public-char-panels');
+  grid.innerHTML='';panels.innerHTML='';
+  D.characters.forEach(c=>{
+    // card
+    const card=document.createElement('div');card.className='char-card';
+    card.onclick=()=>toggleCharPanel('panel-'+c.id);
+    const imgHtml=c.imgSrc
+      ?`<img src="${c.imgSrc}" alt="${c.name}"><div class="char-img-overlay"></div>`
+      :`<div class="char-no-img">NO IMAGE</div>`;
+    card.innerHTML=`<div class="char-img-wrap">${imgHtml}</div>
+      <div class="char-info">
+        <div class="char-role">${c.role}</div>
+        <div class="char-name">${c.name}</div>
+        <div class="char-desc">${c.short}</div>
+      </div>`;
+    grid.appendChild(card);
+    // detail panel
+    const panel=document.createElement('div');
+    panel.className='char-detail-panel';panel.id='panel-'+c.id;
+    const traitsHtml=c.traits.map(t=>`<li>${t}</li>`).join('');
+    panel.innerHTML=`<div style="font-size:.65rem;letter-spacing:.2em;color:var(--text-dim);font-family:'Cinzel',serif;margin-bottom:.5rem">CHARACTER PROFILE</div>
+      <div style="font-size:1.3rem;color:var(--moonlight);margin-bottom:1rem">${c.name}</div>
+      <p style="font-size:.85rem;line-height:2;color:var(--text-body)">${c.desc}</p>
+      <ul class="char-trait-list">${traitsHtml}</ul>`;
+    panels.appendChild(panel);
+  });
+}
+function toggleCharPanel(id){
+  const p=document.getElementById(id);if(!p)return;
+  const open=p.classList.contains('open');
+  document.querySelectorAll('.char-detail-panel').forEach(x=>x.classList.remove('open'));
+  if(!open)p.classList.add('open');
+}
+
+/* ═══ HOME CHARS PREVIEW ═══ */
+function renderHomeCharsPreview(){
+  const wrap=document.getElementById('home-chars-preview');
+  const show=D.characters.filter(c=>c.showHome==='yes').slice(0,3);
+  wrap.innerHTML=show.map(c=>`
+    <div class="home-char-item" onclick="showPage('characters',document.querySelectorAll('.nav-tabs a')[1])">
+      ${c.imgSrc?`<img src="${c.imgSrc}" alt="${c.name}">`:`<div style="width:60px;height:80px;background:rgba(17,34,68,.4);display:flex;align-items:center;justify-content:center;font-size:1.2rem;opacity:.4">👤</div>`}
+      <div>
+        <div class="home-char-role">${c.role.split('·')[0].trim()}</div>
+        <div class="home-char-name">${c.name}</div>
+        <div class="home-char-desc">${c.short}</div>
+      </div>
+    </div>`).join('');
+}
+
+/* ═══ EP LIST ═══ */
 function renderEpList(){
   const pub=D.episodes.filter(e=>e.status==='pub');
   const other=D.episodes.filter(e=>e.status!=='pub');
   let h='<div class="volume-title">VOLUME I — 죽은 남편의 성</div>';
-  if(!pub.length) h+='<div style="padding:2rem;color:var(--text-dim);font-size:.85rem">아직 공개된 화가 없습니다.</div>';
-  pub.forEach((ep,i)=>{h+=`<div class="ep-item" onclick="openEpById(${ep.id})"><span class="ep-num">EP.${String(ep.num).padStart(3,'0')}</span><span class="ep-title-txt">${ep.title}</span><span class="ep-status ${i===pub.length-1?'new':''}">${i===pub.length-1?'NEW':''}</span></div>`;});
-  other.slice(0,4).forEach(ep=>{h+=`<div class="ep-item disabled"><span class="ep-num">EP.${String(ep.num).padStart(3,'0')}</span><span class="ep-title-txt">${ep.title}</span><span class="ep-status upcoming">예정</span></div>`;});
+  if(!pub.length)h+='<div style="padding:2rem;color:var(--text-dim);font-size:.85rem">아직 공개된 화가 없습니다.</div>';
+  pub.forEach((ep,i)=>{h+=`<div class="ep-item" onclick="openEpById(${ep.id})">
+    <span class="ep-num">EP.${String(ep.num).padStart(3,'0')}</span>
+    <span class="ep-title-txt">${ep.title}</span>
+    <span class="ep-status ${i===pub.length-1?'new':''}">${i===pub.length-1?'NEW':''}</span></div>`;});
+  other.slice(0,4).forEach(ep=>{h+=`<div class="ep-item disabled">
+    <span class="ep-num">EP.${String(ep.num).padStart(3,'0')}</span>
+    <span class="ep-title-txt">${ep.title}</span>
+    <span class="ep-status upcoming">예정</span></div>`;});
   document.getElementById('public-ep-list').innerHTML=h;
 }
 
+/* ═══ GALLERY ═══ */
 function renderGallery(){
-  document.getElementById('public-gallery').innerHTML=D.illustrations.map(i=>`<div class="gallery-item" onclick="openLightbox('${i.src}')"><img src="${i.src}" alt="${i.caption}"><div class="gallery-overlay"><span class="gallery-caption">${i.caption}</span></div></div>`).join('');
+  document.getElementById('public-gallery').innerHTML=D.illustrations.map(i=>
+    `<div class="gallery-item" onclick="openLightbox('${i.src}')">
+       <img src="${i.src}" alt="${i.caption}">
+       <div class="gallery-overlay"><span class="gallery-caption">${i.caption}</span></div>
+     </div>`).join('');
 }
 
+/* ═══ REVIEWS ═══ */
 function renderReviews(){
-  document.getElementById('reviews-list').innerHTML=D.reviews.map(r=>`<div class="review-item"><div class="review-header"><div><span class="review-author">${r.author}</span><span class="review-stars" style="margin-left:.7rem">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</span></div><span class="review-date">${r.date}</span></div><p class="review-body">${r.body}</p></div>`).join('');
+  document.getElementById('reviews-list').innerHTML=D.reviews.map(r=>
+    `<div class="review-item">
+       <div class="review-header">
+         <div><span class="review-author">${r.author}</span>
+           <span class="review-stars" style="margin-left:.7rem">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</span></div>
+         <span class="review-date">${r.date}</span>
+       </div>
+       <p class="review-body">${r.body}</p>
+     </div>`).join('');
 }
 
+/* ═══ VIEWER ═══ */
 function openEpById(id){
   const pub=D.episodes.filter(e=>e.status==='pub');
-  const idx=pub.findIndex(e=>e.id===id);
-  if(idx<0)return;
-  currentEpIdx=idx;
-  showPage('viewer',document.querySelectorAll('.nav-tabs a')[3]);
+  const idx=pub.findIndex(e=>e.id===id);if(idx<0)return;
+  currentEpIdx=idx;showPage('viewer',document.querySelectorAll('.nav-tabs a')[3]);
 }
-
 function renderViewer(idx){
   const pub=D.episodes.filter(e=>e.status==='pub');
-  if(!pub.length){document.getElementById('viewer-content').innerHTML='<div class="placeholder-text">아직 공개된 화가 없습니다.</div>';document.getElementById('viewer-ep-info').textContent='—';return;}
-  idx=Math.max(0,Math.min(idx,pub.length-1));
-  currentEpIdx=idx;
+  if(!pub.length){
+    document.getElementById('viewer-content').innerHTML='<div class="placeholder-text">아직 공개된 화가 없습니다.</div>';
+    document.getElementById('viewer-ep-info').textContent='—';return;
+  }
+  idx=Math.max(0,Math.min(idx,pub.length-1));currentEpIdx=idx;
   const ep=pub[idx];
   document.getElementById('viewer-ep-info').textContent=`EP.${String(ep.num).padStart(3,'0')} — ${ep.title}`;
-  const lines=ep.body.split('\n');
   let body='';
-  lines.forEach(line=>{
+  ep.body.split('\n').forEach(line=>{
     const l=line.trim();if(!l)return;
     if(l==='***'){body+='<div class="scene-break">* * *</div>';}
     else if(l.startsWith('---ILLUST:')){
       const inner=l.replace(/^---ILLUST:/,'').replace(/---$/,'');
       const [key,cap]=inner.split(':');
-      const found=D.illustrations.find(i=>i.caption.toLowerCase().includes(key.toLowerCase())||i.src.toLowerCase().includes(key.toLowerCase()));
+      // look in illustrations first, then in character images
+      let found=D.illustrations.find(i=>i.caption.toLowerCase().includes(key.toLowerCase())||i.src.toLowerCase().includes(key.toLowerCase()));
+      if(!found){const ch=D.characters.find(c=>c.name.includes(key)||c.imgSrc&&c.imgSrc.toLowerCase().includes(key.toLowerCase()));if(ch&&ch.imgSrc)found={src:ch.imgSrc,caption:cap||ch.name};}
       if(found)body+=`<img class="viewer-illust" src="${found.src}" alt="${cap||key}"><div class="illust-caption">${cap||key}</div>`;
-    }else if(l.startsWith('"')||l.startsWith('\u201c')){body+=`<p class="dialogue">${esc(l)}</p>`;}
+    }
+    else if(l.startsWith('"')||l.startsWith('\u201c')){body+=`<p class="dialogue">${esc(l)}</p>`;}
     else{body+=`<p>${esc(l)}</p>`;}
   });
-  document.getElementById('viewer-content').innerHTML=`<div class="viewer-chapter-title">제 ${ep.num}화 — ${esc(ep.title)}</div>${ep.sub?`<div class="viewer-chapter-sub">${esc(ep.sub)}</div>`:''}<div class="viewer-body">${body}</div>${idx===pub.length-1?'<p style="text-align:center;font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:.9rem;color:var(--text-dim);margin-top:3rem">— 다음 화는 업데이트 예정입니다 —</p>':''}`;
+  document.getElementById('viewer-content').innerHTML=`
+    <div class="viewer-chapter-title">제 ${ep.num}화 — ${esc(ep.title)}</div>
+    ${ep.sub?`<div class="viewer-chapter-sub">${esc(ep.sub)}</div>`:''}
+    <div class="viewer-body">${body}</div>
+    ${idx===pub.length-1?'<p style="text-align:center;font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:.9rem;color:var(--text-dim);margin-top:3rem">— 다음 화는 업데이트 예정입니다 —</p>':''}`;
 }
-
 function navigateEp(d){
   const pub=D.episodes.filter(e=>e.status==='pub');
-  const n=currentEpIdx+d;
-  if(n<0||n>=pub.length)return;
+  const n=currentEpIdx+d;if(n<0||n>=pub.length)return;
   currentEpIdx=n;renderViewer(currentEpIdx);window.scrollTo(0,60);
 }
 
-function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+/* ═══ HOME INFO ═══ */
+function saveHomeInfo(){
+  const title=document.getElementById('edit-title').value.trim();
+  const logline=document.getElementById('edit-logline').value.trim();
+  const synopsis=document.getElementById('edit-synopsis').value.trim();
+  const tags=document.getElementById('edit-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const keywords=document.getElementById('edit-keywords').value.split(',').map(k=>k.trim()).filter(Boolean);
+  D.home={title,logline,synopsis,tags,keywords};showToast('저장 중...','');save().then(ok=>{if(ok)showToast('홈 정보가 저장되었습니다.','success')});applyHomeInfo();
+  }
+function applyHomeInfo(){
+  const h=D.home;
+  document.getElementById('home-title').innerHTML=h.title.replace(/\n/g,'<br>');
+  document.getElementById('home-logline').textContent=h.logline;
+  document.getElementById('home-synopsis').innerHTML=h.synopsis.replace(/\n\n/g,'<br><br>');
+  document.getElementById('home-tags').innerHTML=h.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  document.getElementById('home-keywords').innerHTML=h.keywords.map(k=>`<span class="keyword">${k}</span>`).join('');
+  // apply cover
+  const coverEl=document.getElementById('home-cover-img');
+  const adminCoverEl=document.getElementById('admin-cover-preview');
+  if(D.coverSrc){coverEl.src=D.coverSrc;coverEl.style.display='block';if(adminCoverEl){adminCoverEl.src=D.coverSrc;adminCoverEl.style.display='block';}}
+  else{coverEl.style.display='none';if(adminCoverEl)adminCoverEl.style.display='none';}
+  // sync admin form
+  document.getElementById('edit-title').value=h.title;
+  document.getElementById('edit-logline').value=h.logline;
+  document.getElementById('edit-synopsis').value=h.synopsis;
+  document.getElementById('edit-tags').value=h.tags.join(',');
+  document.getElementById('edit-keywords').value=h.keywords.join(',');
+}
 
-// ─── ADMIN REFRESH ───────────────────────────
+/* ═══════════════════════════════════════
+   CHARACTER ADMIN
+═══════════════════════════════════════ */
+function renderAdminChars(){
+  const grid=document.getElementById('admin-char-grid');
+  if(!D.characters.length){
+    grid.innerHTML='<div style="grid-column:1/-1;padding:2rem;color:var(--text-dim);font-size:.85rem">등록된 인물이 없습니다. + 인물 추가 버튼으로 등록하세요.</div>';return;
+  }
+  grid.innerHTML=D.characters.map(c=>{
+    const imgHtml=c.imgSrc
+      ?`<img src="${c.imgSrc}" alt="${c.name}" style="width:100%;height:100%;object-fit:cover;object-position:top;filter:brightness(.8) saturate(.7)">`
+      :`<div class="admin-char-no-img"><span style="font-size:1.8rem;opacity:.3">👤</span><span>이미지 없음</span></div>`;
+    return `<div class="admin-char-card">
+      <div class="admin-char-img-wrap">
+        ${imgHtml}
+        <div class="admin-char-img-overlay">
+          <button class="admin-btn admin-btn-warn admin-btn-sm" onclick="openEditCharModal(${c.id})">✏ 편집</button>
+        </div>
+      </div>
+      <div class="admin-char-info">
+        <div class="admin-char-role-badge">${c.role}</div>
+        <div class="admin-char-name">${c.name}</div>
+        <div style="font-size:.72rem;color:var(--text-dim);margin-bottom:.3rem">${c.short}</div>
+        <div style="font-size:.65rem;color:${c.showHome==='yes'?'#4ec99a':'var(--text-dim)'}">
+          ${c.showHome==='yes'?'✓ 홈 표시':'홈 미표시'}
+        </div>
+        <div class="admin-char-actions">
+          <button class="admin-btn admin-btn-warn admin-btn-sm" style="flex:1;justify-content:center" onclick="openEditCharModal(${c.id})">✏ 편집</button>
+          <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="delChar(${c.id})">🗑</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openNewCharModal(){
+  editingCharId=null;pendingCharImgFile=null;
+  document.getElementById('char-modal-title').textContent='인물 등록';
+  document.getElementById('char-name-input').value='';
+  document.getElementById('char-role-input').value='';
+  document.getElementById('char-short-input').value='';
+  document.getElementById('char-desc-input').value='';
+  document.getElementById('char-traits-input').value='';
+  document.getElementById('char-home-input').value='yes';
+  document.getElementById('char-img-file').value='';
+  document.getElementById('char-modal-img-preview').style.display='none';
+  document.getElementById('char-modal-img-placeholder').style.display='flex';
+  document.getElementById('char-modal').classList.add('open');
+}
+function openEditCharModal(id){
+  const c=D.characters.find(x=>x.id===id);if(!c)return;
+  editingCharId=id;pendingCharImgFile=null;
+  document.getElementById('char-modal-title').textContent=`인물 편집 — ${c.name}`;
+  document.getElementById('char-name-input').value=c.name;
+  document.getElementById('char-role-input').value=c.role;
+  document.getElementById('char-short-input').value=c.short;
+  document.getElementById('char-desc-input').value=c.desc;
+  document.getElementById('char-traits-input').value=c.traits.join(',');
+  document.getElementById('char-home-input').value=c.showHome||'yes';
+  document.getElementById('char-img-file').value='';
+  if(c.imgSrc){
+    document.getElementById('char-modal-img-preview').src=c.imgSrc;
+    document.getElementById('char-modal-img-preview').style.display='block';
+    document.getElementById('char-modal-img-placeholder').style.display='none';
+  }else{
+    document.getElementById('char-modal-img-preview').style.display='none';
+    document.getElementById('char-modal-img-placeholder').style.display='flex';
+  }
+  document.getElementById('char-modal').classList.add('open');
+}
+function closeCharModal(){document.getElementById('char-modal').classList.remove('open')}
+
+function previewCharImg(input){
+  if(!input.files[0])return;
+  pendingCharImgFile=input.files[0];
+  const r=new FileReader();
+  r.onload=e=>{
+    document.getElementById('char-modal-img-preview').src=e.target.result;
+    document.getElementById('char-modal-img-preview').style.display='block';
+    document.getElementById('char-modal-img-placeholder').style.display='none';
+  };
+  r.readAsDataURL(pendingCharImgFile);
+}
+
+function saveChar(){
+  const name=document.getElementById('char-name-input').value.trim();
+  const role=document.getElementById('char-role-input').value.trim();
+  const short=document.getElementById('char-short-input').value.trim();
+  const desc=document.getElementById('char-desc-input').value.trim();
+  const traits=document.getElementById('char-traits-input').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const showHome=document.getElementById('char-home-input').value;
+  if(!name){showToast('이름은 필수입니다.','error');return;}
+
+  function finalize(imgSrc){
+    if(editingCharId){
+      const idx=D.characters.findIndex(c=>c.id===editingCharId);
+      if(idx>=0)D.characters[idx]={...D.characters[idx],name,role,short,desc,traits,showHome,imgSrc};
+    }else{
+      D.characters.push({id:Date.now(),name,role,short,desc,traits,showHome,imgSrc});
+    }
+    showToast('저장 중...','');save().then(ok=>{if(ok){closeCharModal();refreshAdmin();renderPublicChars();renderHomeCharsPreview();showToast(editingCharId?'인물 정보가 수정되었습니다.':'새 인물이 등록되었습니다.','success');}});
+  }
+
+  if(pendingCharImgFile){
+    const r=new FileReader();
+    r.onload=e=>finalize(e.target.result);
+    r.readAsDataURL(pendingCharImgFile);
+  }else{
+    // keep existing imgSrc
+    const existing=editingCharId?D.characters.find(c=>c.id===editingCharId):null;
+    finalize(existing?existing.imgSrc:'');
+  }
+}
+
+function delChar(id){
+  if(!confirm('이 인물을 삭제하시겠습니까?'))return;
+  D.characters=D.characters.filter(c=>c.id!==id);
+  save().then(ok=>{if(ok){refreshAdmin();renderPublicChars();renderHomeCharsPreview();showToast('인물이 삭제되었습니다.','error');}});
+}
+
+/* ═══ ADMIN REFRESH ═══ */
 function refreshAdmin(){
   const pub=D.episodes.filter(e=>e.status==='pub').length;
+  document.getElementById('stat-char').textContent=D.characters.length;
   document.getElementById('stat-ep').textContent=D.episodes.length;
   document.getElementById('stat-pub').textContent=pub;
   document.getElementById('stat-illust').textContent=D.illustrations.length;
   document.getElementById('stat-rev').textContent=D.reviews.length;
+  document.getElementById('char-badge').textContent=D.characters.length;
   document.getElementById('ep-badge').textContent=D.episodes.length;
   document.getElementById('illust-badge').textContent=D.illustrations.length;
   document.getElementById('rev-badge').textContent=D.reviews.length;
 
-  // Episode list
-  document.getElementById('admin-ep-list').innerHTML=D.episodes.length?D.episodes.map(ep=>`<div class="admin-ep-row"><span class="admin-ep-num">EP.${String(ep.num).padStart(3,'0')}</span><span class="admin-ep-title-text">${ep.title}</span><span class="admin-ep-badge ${ep.status}">${ep.status==='pub'?'공개':ep.status==='draft'?'초안':'예정'}</span><div class="admin-ep-actions"><button class="admin-btn admin-btn-warn admin-btn-sm" onclick="openEditEp(${ep.id})">편집</button><button class="admin-btn admin-btn-danger admin-btn-sm" onclick="delEp(${ep.id})">삭제</button></div></div>`).join(''):'<div style="padding:2rem;color:var(--text-dim);font-size:.85rem">등록된 에피소드가 없습니다.</div>';
+  renderAdminChars();
 
-  // Dash recent
-  document.getElementById('dash-recent').innerHTML=[...D.episodes].reverse().slice(0,4).map(ep=>`<div style="display:flex;align-items:center;gap:1rem;padding:.55rem 0;border-bottom:1px solid var(--border)"><span style="font-family:'Cinzel',serif;font-size:.6rem;color:var(--text-dim);min-width:55px">EP.${String(ep.num).padStart(3,'0')}</span><span style="flex:1;font-size:.85rem;color:var(--text-body)">${ep.title}</span><span class="admin-ep-badge ${ep.status}">${ep.status==='pub'?'공개':ep.status==='draft'?'초안':'예정'}</span></div>`).join('')||'<div style="color:var(--text-dim);font-size:.8rem;padding:.5rem 0">에피소드가 없습니다.</div>';
+  document.getElementById('admin-ep-list').innerHTML=D.episodes.length
+    ?D.episodes.map(ep=>`<div class="admin-ep-row">
+        <span class="admin-ep-num">EP.${String(ep.num).padStart(3,'0')}</span>
+        <span class="admin-ep-title-text">${ep.title}</span>
+        <span class="admin-ep-badge ${ep.status}">${ep.status==='pub'?'공개':ep.status==='draft'?'초안':'예정'}</span>
+        <div class="admin-ep-actions">
+          <button class="admin-btn admin-btn-warn admin-btn-sm" onclick="openEditEp(${ep.id})">편집</button>
+          <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="delEp(${ep.id})">삭제</button>
+        </div></div>`).join('')
+    :'<div style="padding:2rem;color:var(--text-dim);font-size:.85rem">등록된 에피소드가 없습니다.</div>';
 
-  // Illust grid
-  document.getElementById('admin-illust-grid').innerHTML=D.illustrations.map(ill=>`<div class="admin-illust-item"><img class="admin-illust-img" src="${ill.src}" alt="${ill.caption}"><div class="admin-illust-label">${ill.caption}</div><div class="admin-illust-actions"><button class="admin-btn admin-btn-danger admin-btn-sm" onclick="delIllust(${ill.id})">🗑 삭제</button></div></div>`).join('');
+  document.getElementById('dash-recent').innerHTML=[...D.episodes].reverse().slice(0,4).map(ep=>
+    `<div style="display:flex;align-items:center;gap:1rem;padding:.55rem 0;border-bottom:1px solid var(--border)">
+       <span style="font-family:'Cinzel',serif;font-size:.6rem;color:var(--text-dim);min-width:55px">EP.${String(ep.num).padStart(3,'0')}</span>
+       <span style="flex:1;font-size:.85rem;color:var(--text-body)">${ep.title}</span>
+       <span class="admin-ep-badge ${ep.status}">${ep.status==='pub'?'공개':ep.status==='draft'?'초안':'예정'}</span>
+     </div>`).join('')||'<div style="color:var(--text-dim);font-size:.8rem;padding:.5rem 0">에피소드가 없습니다.</div>';
 
-  // Reviews admin
-  document.getElementById('admin-rev-list').innerHTML=D.reviews.length?D.reviews.map(r=>`<div class="admin-ep-row" style="flex-wrap:wrap;gap:.5rem"><div style="display:flex;align-items:center;gap:.8rem;flex:1;min-width:200px"><span style="color:var(--moonlight);font-size:.82rem">${r.author}</span><span style="color:var(--gold-pale);font-size:.7rem">${'★'.repeat(r.stars)}</span><span style="color:var(--text-dim);font-size:.65rem">${r.date}</span></div><span style="flex:2;font-size:.78rem;color:var(--text-dim)">${r.body.slice(0,55)}${r.body.length>55?'…':''}</span><button class="admin-btn admin-btn-danger admin-btn-sm" onclick="delReview(${r.id})">삭제</button></div>`).join(''):'<div style="padding:2rem;color:var(--text-dim);font-size:.85rem">리뷰가 없습니다.</div>';
+  document.getElementById('admin-illust-grid').innerHTML=D.illustrations.map(ill=>
+    `<div class="admin-illust-item">
+       <img class="admin-illust-img" src="${ill.src}" alt="${ill.caption}">
+       <div class="admin-illust-label">${ill.caption}</div>
+       <div class="admin-illust-actions">
+         <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="delIllust(${ill.id})">🗑 삭제</button>
+       </div>
+     </div>`).join('');
+
+  document.getElementById('admin-rev-list').innerHTML=D.reviews.length
+    ?D.reviews.map(r=>`<div class="admin-ep-row">
+        <div style="display:flex;align-items:center;gap:.8rem;flex:1;min-width:180px">
+          <span style="color:var(--moonlight);font-size:.82rem">${r.author}</span>
+          <span style="color:var(--gold-pale);font-size:.7rem">${'★'.repeat(r.stars)}</span>
+          <span style="color:var(--text-dim);font-size:.65rem">${r.date}</span>
+        </div>
+        <span style="flex:2;font-size:.78rem;color:var(--text-dim)">${r.body.slice(0,55)}${r.body.length>55?'…':''}</span>
+        <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="delReview(${r.id})">삭제</button>
+      </div>`).join('')
+    :'<div style="padding:2rem;color:var(--text-dim);font-size:.85rem">리뷰가 없습니다.</div>';
 }
 
 function showAdminSec(name,el){
@@ -737,7 +1282,7 @@ function showAdminSec(name,el){
   if(el)el.classList.add('active');
 }
 
-// ─── EPISODE MODAL ────────────────────────────
+/* ═══ EP MODAL ═══ */
 function openNewEpModal(){
   editingEpId=null;
   document.getElementById('ep-modal-title').textContent='새 에피소드 작성';
@@ -767,23 +1312,16 @@ function saveEpisode(){
   const body=document.getElementById('ep-body-input').value;
   const status=document.getElementById('ep-status-input').value;
   if(!title||!num){showToast('화수와 제목은 필수입니다.','error');return;}
-  if(editingEpId){
-    const i=D.episodes.findIndex(e=>e.id===editingEpId);
-    if(i>=0)D.episodes[i]={...D.episodes[i],num,title,sub,body,status};
-  }else{
-    D.episodes.push({id:Date.now(),num,title,sub,body,status});
-  }
-  D.episodes.sort((a,b)=>a.num-b.num);
-  save();closeEpModal();refreshAdmin();
-  showToast(editingEpId?'에피소드가 수정되었습니다.':'새 에피소드가 등록되었습니다.','success');
+  if(editingEpId){const i=D.episodes.findIndex(e=>e.id===editingEpId);if(i>=0)D.episodes[i]={...D.episodes[i],num,title,sub,body,status};}
+  else D.episodes.push({id:Date.now(),num,title,sub,body,status});
+  D.episodes.sort((a,b)=>a.num-b.num);showToast('저장 중...','');save().then(ok=>{if(ok){closeEpModal();refreshAdmin();showToast(editingEpId?'에피소드가 수정되었습니다.':'새 에피소드가 등록되었습니다.','success');}});
 }
 function delEp(id){
   if(!confirm('이 에피소드를 삭제하시겠습니까?'))return;
-  D.episodes=D.episodes.filter(e=>e.id!==id);
-  save();refreshAdmin();showToast('에피소드가 삭제되었습니다.','error');
+  D.episodes=D.episodes.filter(e=>e.id!==id);save().then(ok=>{if(ok){refreshAdmin();showToast('에피소드가 삭제되었습니다.','error');}});
 }
 
-// ─── ILLUST MODAL ─────────────────────────────
+/* ═══ ILLUST MODAL ═══ */
 function openIllustModal(){
   pendingIllustFile=null;
   document.getElementById('illust-caption-input').value='';
@@ -803,112 +1341,79 @@ function saveIllust(){
   if(!pendingIllustFile){showToast('이미지를 선택해주세요.','error');return;}
   const cap=document.getElementById('illust-caption-input').value.trim()||pendingIllustFile.name;
   const r=new FileReader();
-  r.onload=e=>{
-    D.illustrations.push({id:Date.now(),src:e.target.result,caption:cap});
-    save();closeIllustModal();refreshAdmin();renderGallery();
-    showToast('삽화가 갤러리에 추가되었습니다.','success');
-  };
+  r.onload=e=>{D.illustrations.push({id:Date.now(),src:e.target.result,caption:cap});
+    showToast('저장 중...','');save().then(ok=>{if(ok){closeIllustModal();refreshAdmin();renderGallery();showToast('삽화가 갤러리에 추가되었습니다.','success');}});};
   r.readAsDataURL(pendingIllustFile);
 }
 function delIllust(id){
   if(!confirm('이 삽화를 삭제하시겠습니까?'))return;
-  D.illustrations=D.illustrations.filter(i=>i.id!==id);
-  save();refreshAdmin();renderGallery();showToast('삽화가 삭제되었습니다.','error');
+  D.illustrations=D.illustrations.filter(i=>i.id!==id);save().then(ok=>{if(ok){refreshAdmin();renderGallery();showToast('삽화가 삭제되었습니다.','error');}});
 }
 
-// ─── COVER ────────────────────────────────────
+/* ═══ COVER ═══ */
 function previewCover(input){
-  if(!input.files[0])return;
-  pendingCoverFile=input.files[0];
-  const r=new FileReader();
-  r.onload=e=>{document.getElementById('cover-preview').innerHTML=`<img src="${e.target.result}" style="max-width:200px;border:1px solid var(--border-bright)">`;};
+  if(!input.files[0])return;pendingCoverFile=input.files[0];
+  const r=new FileReader();r.onload=e=>{document.getElementById('cover-preview').innerHTML=`<img src="${e.target.result}" style="max-width:200px;border:1px solid var(--border-bright)">`;};
   r.readAsDataURL(pendingCoverFile);
 }
 function saveCover(){
   if(!pendingCoverFile){showToast('이미지를 선택해주세요.','error');return;}
   const r=new FileReader();
-  r.onload=e=>{
-    D.coverSrc=e.target.result;
-    document.getElementById('home-cover-img').src=e.target.result;
-    document.getElementById('admin-cover-preview').src=e.target.result;
-    save();document.getElementById('cover-modal').classList.remove('open');
-    showToast('표지가 업데이트되었습니다.','success');
-  };
+  r.onload=e=>{D.coverSrc=e.target.result;document.getElementById('home-cover-img').src=e.target.result;document.getElementById('admin-cover-preview').src=e.target.result;
+    showToast('저장 중...','');save().then(ok=>{if(ok){document.getElementById('cover-modal').classList.remove('open');showToast('표지가 업데이트되었습니다.','success');}});};
   r.readAsDataURL(pendingCoverFile);
 }
 
-// ─── HOME INFO ────────────────────────────────
-function saveHomeInfo(){
-  const title=document.getElementById('edit-title').value.trim();
-  const logline=document.getElementById('edit-logline').value.trim();
-  const synopsis=document.getElementById('edit-synopsis').value.trim();
-  const tags=document.getElementById('edit-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
-  const keywords=document.getElementById('edit-keywords').value.split(',').map(k=>k.trim()).filter(Boolean);
-  D.home={title,logline,synopsis,tags,keywords};
-  save();applyHomeInfo();
-  showToast('홈 정보가 저장되었습니다.','success');
-}
-function applyHomeInfo(){
-  const h=D.home;
-  document.getElementById('home-title').innerHTML=h.title.replace(/\n/g,'<br>');
-  document.getElementById('home-logline').textContent=h.logline;
-  document.getElementById('home-synopsis').innerHTML=h.synopsis.replace(/\n\n/g,'<br><br>');
-  document.getElementById('home-tags').innerHTML=h.tags.map(t=>`<span class="tag">${t}</span>`).join('');
-  document.getElementById('home-keywords').innerHTML=h.keywords.map(k=>`<span class="keyword">${k}</span>`).join('');
-}
-
-// ─── REVIEWS ─────────────────────────────────
+/* ═══ REVIEWS ═══ */
 function submitReview(){
   const name=document.getElementById('r-name').value.trim();
   const body=document.getElementById('r-body').value.trim();
   if(!name||!body||!currentStar){alert('닉네임, 별점, 리뷰를 모두 입력해주세요.');return;}
   const today=new Date().toISOString().slice(0,10).replace(/-/g,'.');
   D.reviews.unshift({id:Date.now(),author:name,stars:currentStar,body,date:today});
-  save();renderReviews();
-  document.getElementById('r-name').value='';document.getElementById('r-body').value='';setStar(0);
-  showToast('리뷰가 등록되었습니다.','success');
+  showToast('저장 중...','');save().then(ok=>{if(ok){renderReviews();showToast('리뷰가 등록되었습니다.','success');}});document.getElementById('r-name').value='';document.getElementById('r-body').value='';setStar(0);
 }
 function delReview(id){
   if(!confirm('이 리뷰를 삭제하시겠습니까?'))return;
-  D.reviews=D.reviews.filter(r=>r.id!==id);
-  save();renderReviews();refreshAdmin();showToast('리뷰가 삭제되었습니다.','error');
+  D.reviews=D.reviews.filter(r=>r.id!==id);save().then(ok=>{if(ok){renderReviews();refreshAdmin();showToast('리뷰가 삭제되었습니다.','error');}});
 }
 function setStar(n){currentStar=n;document.querySelectorAll('#star-select span').forEach((s,i)=>s.classList.toggle('active',i<n))}
 
-// ─── CHARS ────────────────────────────────────
-function toggleChar(id){
-  const p=document.getElementById(id);
-  const open=p.classList.contains('open');
-  document.querySelectorAll('.char-detail-panel').forEach(x=>x.classList.remove('open'));
-  if(!open)p.classList.add('open');
-}
-
-// ─── LIGHTBOX ─────────────────────────────────
+/* ═══ UTILS ═══ */
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open')}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open')}
 document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox()});
-
-// ─── TOAST ────────────────────────────────────
 let toastTimer;
 function showToast(msg,type=''){
   const t=document.getElementById('toast');
   t.textContent=(type==='success'?'✓ ':type==='error'?'✕ ':'')+msg;
   t.className='toast show'+(type?' '+type:'');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'),3000);
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-// ─── MODAL BACKDROP ───────────────────────────
-['ep-modal','illust-modal','cover-modal'].forEach(id=>{
+/* ═══ MODAL BACKDROPS ═══ */
+['ep-modal','illust-modal','cover-modal','char-modal'].forEach(id=>{
   document.getElementById(id).addEventListener('click',function(e){if(e.target===this)this.classList.remove('open')});
 });
 document.getElementById('admin-login-overlay').addEventListener('click',function(e){if(e.target===this)closeAdminLogin()});
 
-// ─── INIT ─────────────────────────────────────
-load();
-applyHomeInfo();
-if(D.coverSrc){document.getElementById('home-cover-img').src=D.coverSrc;document.getElementById('admin-cover-preview').src=D.coverSrc;}
-renderReviews();renderGallery();renderViewer(0);
+/* ═══ INIT ═══ */
+async function init(){
+  await load();  // GitHub에서 데이터 불러온 뒤
+  applyHomeInfo();
+  // cover applied inside applyHomeInfo()
+  renderHomeCharsPreview();
+  renderReviews();renderGallery();renderViewer(0);
+}
+init();
 </script>
+
+<!-- GITHUB LOADING OVERLAY -->
+<div id="gh-loader" style="display:none;position:fixed;inset:0;background:rgba(8,12,20,.96);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;">
+  <div style="width:48px;height:48px;border:2px solid rgba(150,180,220,.2);border-top-color:var(--moonlight-dim);border-radius:50%;animation:spin 1s linear infinite;"></div>
+  <div style="font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.25em;color:var(--text-dim);">LOADING</div>
+  <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+</div>
 </body>
 </html>

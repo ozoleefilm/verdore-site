@@ -965,6 +965,24 @@ const GH_TOKEN = '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';
 const GH_API   = `https://api.github.com/repos/${GH_USER}/${GH_REPO}/contents/${GH_FILE}`;
 let ghSHA = '';
 
+/* ═══ CLOUDINARY CONFIG ═══ */
+const CL_CLOUD  = 'dtowsl4fe';
+const CL_PRESET = 'verdore_unsigned'; // unsigned upload preset (아래 안내 참조)
+const CL_API    = `https://api.cloudinary.com/v1_1/${CL_CLOUD}/image/upload`;
+
+/* 이미지를 Cloudinary에 업로드하고 URL 반환 */
+async function uploadToCloudinary(file){
+  const fd = new FormData();
+  fd.append('file', file);
+  fd.append('upload_preset', CL_PRESET);
+  fd.append('folder', 'verdore');
+  showToast('이미지 업로드 중...', '');
+  const res = await fetch(CL_API, {method:'POST', body:fd});
+  if(!res.ok) throw new Error('Cloudinary 업로드 실패');
+  const j = await res.json();
+  return j.secure_url; // https://res.cloudinary.com/... URL
+}
+
 /* ═══ LOAD — GitHub에서 데이터 읽기 ═══ */
 async function load(){
   showLoader(true);
@@ -1309,7 +1327,7 @@ function previewCharImg(input){
   r.readAsDataURL(pendingCharImgFile);
 }
 
-function saveChar(){
+async function saveChar(){
   const name=document.getElementById('char-name-input').value.trim();
   const role=document.getElementById('char-role-input').value.trim();
   const short=document.getElementById('char-short-input').value.trim();
@@ -1329,12 +1347,13 @@ function saveChar(){
   }
 
   if(pendingCharImgFile){
-    const r=new FileReader();
-    r.onload=e=>finalize(e.target.result);
-    r.readAsDataURL(pendingCharImgFile);
+    try{
+      const url = await uploadToCloudinary(pendingCharImgFile);
+      finalize(url);
+    }catch(e){showToast('이미지 업로드 실패: '+e.message,'error');}
   }else{
-    // keep existing imgSrc
-    const existing=editingCharId?D.characters.find(c=>c.id===editingCharId):null;
+    // 이미지 변경 없으면 기존 URL 유지
+    const existing=editingCharId?D.characters.find(ch=>ch.id===editingCharId):null;
     finalize(existing?existing.imgSrc:'');
   }
 }
@@ -1462,13 +1481,15 @@ function previewIllust(input){
   r.onload=e=>{document.getElementById('illust-preview').innerHTML=`<div class="upload-thumb"><img src="${e.target.result}"></div>`;};
   r.readAsDataURL(pendingIllustFile);
 }
-function saveIllust(){
+async function saveIllust(){
   if(!pendingIllustFile){showToast('이미지를 선택해주세요.','error');return;}
   const cap=document.getElementById('illust-caption-input').value.trim()||pendingIllustFile.name;
-  const r=new FileReader();
-  r.onload=e=>{D.illustrations.push({id:Date.now(),src:e.target.result,caption:cap});
-    showToast('저장 중...','');save().then(ok=>{if(ok){closeIllustModal();refreshAdmin();renderGallery();showToast('삽화가 갤러리에 추가되었습니다.','success');}});};
-  r.readAsDataURL(pendingIllustFile);
+  try{
+    const url = await uploadToCloudinary(pendingIllustFile);
+    D.illustrations.push({id:Date.now(),src:url,caption:cap});
+    showToast('저장 중...','');
+    save().then(ok=>{if(ok){closeIllustModal();refreshAdmin();renderGallery();showToast('삽화가 갤러리에 추가되었습니다.','success');}});
+  }catch(e){showToast('삽화 업로드 실패: '+e.message,'error');}
 }
 function delIllust(id){
   if(!confirm('이 삽화를 삭제하시겠습니까?'))return;
@@ -1481,12 +1502,18 @@ function previewCover(input){
   const r=new FileReader();r.onload=e=>{document.getElementById('cover-preview').innerHTML=`<img src="${e.target.result}" style="max-width:200px;border:1px solid var(--border-bright)">`;};
   r.readAsDataURL(pendingCoverFile);
 }
-function saveCover(){
+async function saveCover(){
   if(!pendingCoverFile){showToast('이미지를 선택해주세요.','error');return;}
-  const r=new FileReader();
-  r.onload=e=>{D.coverSrc=e.target.result;document.getElementById('home-cover-img').src=e.target.result;document.getElementById('admin-cover-preview').src=e.target.result;
-    showToast('저장 중...','');save().then(ok=>{if(ok){document.getElementById('cover-modal').classList.remove('open');showToast('표지가 업데이트되었습니다.','success');}});};
-  r.readAsDataURL(pendingCoverFile);
+  try{
+    const url = await uploadToCloudinary(pendingCoverFile);
+    D.coverSrc = url;
+    document.getElementById('home-cover-img').src=url;
+    document.getElementById('home-cover-img').style.display='block';
+    const ap=document.getElementById('admin-cover-preview');
+    if(ap){ap.src=url;ap.style.display='block';}
+    showToast('저장 중...','');
+    save().then(ok=>{if(ok){document.getElementById('cover-modal').classList.remove('open');showToast('표지가 업데이트되었습니다.','success');}});
+  }catch(e){showToast('표지 업로드 실패: '+e.message,'error');}
 }
 
 /* ═══ REVIEWS ═══ */

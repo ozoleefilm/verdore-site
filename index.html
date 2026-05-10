@@ -514,14 +514,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;
     <button class="admin-login-close" onclick="closeAdminLogin()">✕</button>
     <div class="admin-login-logo">VERDORE CASTLE — ADMIN</div>
     <div class="admin-login-title">관리자 로그인</div>
-    <div class="admin-login-sub">관리자 전용 페이지입니다.<br>비밀번호와 GitHub 토큰을 입력하세요.</div>
-    <div class="admin-pw-wrap" style="margin-bottom:.8rem">
-      <input class="admin-pw-input" id="admin-pw" type="password" placeholder="비밀번호 (verdore89)" onkeydown="if(event.key==='Enter')tryAdminLogin()">
-      <button class="admin-pw-toggle" onclick="togglePwVis()" tabindex="-1">👁</button>
-    </div>
+    <div class="admin-login-sub">관리자 전용 페이지입니다.<br>비밀번호를 입력하세요.</div>
     <div class="admin-pw-wrap">
-      <input class="admin-pw-input" id="admin-token" type="password" placeholder="GitHub Token (ghp_xxx...)" onkeydown="if(event.key==='Enter')tryAdminLogin()">
-      <button class="admin-pw-toggle" onclick="toggleTokenVis()" tabindex="-1">👁</button>
+      <input class="admin-pw-input" id="admin-pw" type="password" placeholder="비밀번호" onkeydown="if(event.key==='Enter')tryAdminLogin()">
+      <button class="admin-pw-toggle" onclick="togglePwVis()" tabindex="-1">👁</button>
     </div>
     <div class="admin-login-error" id="admin-login-error"></div>
     <button class="admin-login-btn" onclick="tryAdminLogin()">입장하기</button>
@@ -967,17 +963,12 @@ let D={
   ]
 };
 
-/* ═══ GITHUB CONFIG ═══ */
-const GH_USER  = 'ozoleefilm';
-const GH_REPO  = 'verdore-site';
-const GH_FILE  = 'data.json';
-let GH_TOKEN = ''; // 관리자 로그인 시 입력받음
-const GH_API   = `https://api.github.com/repos/${GH_USER}/${GH_REPO}/contents/${GH_FILE}`;
-let ghSHA = '';
+/* ═══ FIREBASE CONFIG ═══ */
+const FB_URL = 'https://verdore-16e98-default-rtdb.firebaseio.com';
 
 /* ═══ CLOUDINARY CONFIG ═══ */
 const CL_CLOUD  = 'dtowsl4fe';
-const CL_PRESET = 'verdore_unsigned'; // unsigned upload preset (아래 안내 참조)
+const CL_PRESET = 'verdore_unsigned';
 const CL_API    = `https://api.cloudinary.com/v1_1/${CL_CLOUD}/image/upload`;
 
 /* 이미지를 Cloudinary에 업로드하고 URL 반환 */
@@ -990,65 +981,38 @@ async function uploadToCloudinary(file){
   const res = await fetch(CL_API, {method:'POST', body:fd});
   if(!res.ok) throw new Error('Cloudinary 업로드 실패');
   const j = await res.json();
-  return j.secure_url; // https://res.cloudinary.com/... URL
+  return j.secure_url;
 }
 
-/* ═══ LOAD — GitHub에서 데이터 읽기 ═══ */
+/* ═══ LOAD — Firebase에서 데이터 읽기 ═══ */
 async function load(){
   showLoader(true);
   try {
-    const res = await fetch(GH_API + '?t=' + Date.now(), {
-      headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'}
-    });
-    if(!res.ok) throw new Error('HTTP '+res.status);
-    const j = await res.json();
-    ghSHA = j.sha;
-    // content가 비어있으면 ({} 또는 빈값) 기본값 유지
-    const raw = j.content.replace(/\n/g,'').trim();
-    if(raw){
-      const parsed = JSON.parse(decodeURIComponent(escape(atob(raw))));
-      // 키가 있는 경우만 덮어씀 (배열도 완전히 교체)
-      if(parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0){
-        D = parsed;
-      }
+    const res = await fetch(FB_URL + '/sitedata.json');
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if(data && typeof data === 'object' && Object.keys(data).length > 0){
+      D = data;
     }
   } catch(e){
-    console.error('GitHub 불러오기 실패:', e.message);
+    console.error('Firebase 불러오기 실패:', e.message);
   }
   showLoader(false);
 }
 
-/* ═══ SAVE — GitHub에 데이터 쓰기 ═══ */
+/* ═══ SAVE — Firebase에 데이터 쓰기 ═══ */
 async function save(){
   try {
-    // 저장 전에 항상 최신 SHA를 새로 가져옴 (충돌 방지)
-    const checkRes = await fetch(GH_API + '?t=' + Date.now(), {
-      headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'}
+    const res = await fetch(FB_URL + '/sitedata.json', {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(D)
     });
-    if(!checkRes.ok) throw new Error('SHA 조회 실패: HTTP '+checkRes.status);
-    const checkJson = await checkRes.json();
-    ghSHA = checkJson.sha; // 항상 최신 SHA로 업데이트
-
-    const jsonStr = JSON.stringify(D);
-    const sizeKB = Math.round(new Blob([jsonStr]).size / 1024);
-    console.log('저장 데이터 크기:', sizeKB, 'KB');
-    if(sizeKB > 900){
-      showToast('데이터가 너무 큽니다 ('+sizeKB+'KB). 이미지를 줄여주세요.','error');
-      return false;
-    }
-    const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
-    const res = await fetch(GH_API, {
-      method:'PUT',
-      headers:{'Authorization':'token '+GH_TOKEN,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},
-      body: JSON.stringify({message:'사이트 데이터 업데이트 '+new Date().toLocaleString('ko-KR'), content:encoded, sha:ghSHA})
-    });
-    if(!res.ok){ const e=await res.json(); throw new Error(e.message); }
-    const j = await res.json();
-    ghSHA = j.content.sha;
+    if(!res.ok) throw new Error('HTTP ' + res.status);
     return true;
   } catch(e){
-    console.error('GitHub 저장 실패:', e);
-    showToast('저장 실패: '+e.message,'error');
+    console.error('Firebase 저장 실패:', e);
+    showToast('저장 실패: ' + e.message, 'error');
     return false;
   }
 }
@@ -1069,14 +1033,7 @@ function openAdminLogin(){
 function closeAdminLogin(){document.getElementById('admin-login-overlay').classList.remove('open')}
 function tryAdminLogin(){
   const pw=document.getElementById('admin-pw').value;
-  const token=document.getElementById('admin-token').value.trim();
   if(pw===ADMIN_PW){
-    if(!token || !token.startsWith('ghp_')){
-      document.getElementById('admin-login-error').textContent='GitHub 토큰을 입력해주세요. (ghp_로 시작)';
-      document.getElementById('admin-token').focus();
-      return;
-    }
-    GH_TOKEN = token; // 런타임에 토큰 설정
     isAdmin=true;closeAdminLogin();
     const btn=document.getElementById('nav-admin-btn');
     btn.classList.add('on');btn.textContent='⚙ 관리자 ✓';

@@ -997,6 +997,12 @@ async function load(){
   } catch(e){
     console.error('Firebase 불러오기 실패:', e.message);
   }
+  // 배열 누락 방지 — Firebase에서 빈 배열은 null로 올 수 있음
+  if(!D.characters || !Array.isArray(D.characters)) D.characters = [];
+  if(!D.episodes || !Array.isArray(D.episodes)) D.episodes = [];
+  if(!D.illustrations || !Array.isArray(D.illustrations)) D.illustrations = [];
+  if(!D.reviews || !Array.isArray(D.reviews)) D.reviews = [];
+  if(!D.home) D.home = {title:'',logline:'',synopsis:'',tags:[],keywords:[]};
   showLoader(false);
 }
 

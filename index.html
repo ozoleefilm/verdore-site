@@ -983,8 +983,16 @@ async function load(){
 
 /* ═══ SAVE — GitHub에 데이터 쓰기 ═══ */
 async function save(){
-  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(D, null, 2))));
   try {
+    // 저장 전에 항상 최신 SHA를 새로 가져옴 (충돌 방지)
+    const checkRes = await fetch(GH_API + '?t=' + Date.now(), {
+      headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'}
+    });
+    if(!checkRes.ok) throw new Error('SHA 조회 실패: HTTP '+checkRes.status);
+    const checkJson = await checkRes.json();
+    ghSHA = checkJson.sha; // 항상 최신 SHA로 업데이트
+
+    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(D, null, 2))));
     const res = await fetch(GH_API, {
       method:'PUT',
       headers:{'Authorization':'token '+GH_TOKEN,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},

@@ -159,8 +159,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;
 .viewer-body{font-size:1rem;line-height:2.2;color:var(--text-body);word-break:keep-all}
 .viewer-body p{margin-bottom:1.4rem;text-indent:0}
 .viewer-body .dialogue{color:#496b97;font-weight:400;text-indent:0}
-.viewer-illust{width:100%;max-width:500px;margin:3rem auto;display:block;
-  border:1px solid var(--border-bright);box-shadow:0 0 40px rgba(100,140,220,.1)}
+.viewer-illust{width:100%;max-width:100%;margin:2.5rem 0;display:block;border:none;box-shadow:none}
 .illust-caption{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;
   font-size:.78rem;color:var(--silver-dim);margin-top:.8rem;margin-bottom:2rem}
 .scene-break{text-align:center;color:var(--silver-dim);opacity:.4;letter-spacing:.5em;
@@ -663,7 +662,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;
   <ul class="nav-tabs" id="main-nav">
     <li><a href="#" class="active" onclick="showPage('home',this);return false">홈</a></li>
     <li><a href="#" onclick="showPage('characters',this);return false">인물</a></li>
-    <li><a href="#" onclick="showPage('contents',this);return false">목차</a></li>
+    <li><a href="#" onclick="showPage('contents',this);return false">에피소드</a></li>
     <li><a href="#" onclick="showPage('viewer',this);return false">읽기</a></li>
     <li><a href="#" onclick="showPage('gallery',this);return false">삽화</a></li>
     <li><a href="#" onclick="showPage('reviews',this);return false">리뷰</a></li>
@@ -678,7 +677,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;
 <div class="nav-drawer" id="nav-drawer">
   <a href="#" onclick="drawerNav('home');return false">홈</a>
   <a href="#" onclick="drawerNav('characters');return false">인물</a>
-  <a href="#" onclick="drawerNav('contents');return false">목차</a>
+  <a href="#" onclick="drawerNav('contents');return false">에피소드</a>
   <a href="#" onclick="drawerNav('viewer');return false">읽기</a>
   <a href="#" onclick="drawerNav('gallery');return false">삽화</a>
   <a href="#" onclick="drawerNav('reviews');return false">리뷰</a>
@@ -721,7 +720,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;
      CONTENTS
 ════════════════════════════════════ -->
 <div class="page" id="page-contents">
-  <div class="section-header"><div class="section-title">TABLE OF CONTENTS</div><div class="section-title-kr">목차</div></div>
+  <div class="section-header"><div class="section-title">TABLE OF CONTENTS</div><div class="section-title-kr">에피소드</div></div>
   <div class="contents-wrap" id="public-ep-list"></div>
 </div>
 
@@ -1196,7 +1195,7 @@ function renderViewer(idx){
       // look in illustrations first, then in character images
       let found=D.illustrations.find(i=>i.caption.toLowerCase().includes(key.toLowerCase())||i.src.toLowerCase().includes(key.toLowerCase()));
       if(!found){const ch=D.characters.find(c=>c.name.includes(key)||c.imgSrc&&c.imgSrc.toLowerCase().includes(key.toLowerCase()));if(ch&&ch.imgSrc)found={src:ch.imgSrc,caption:cap||ch.name};}
-      if(found)body+=`<img class="viewer-illust" src="${found.src}" alt="${cap||key}"><div class="illust-caption">${cap||key}</div>`;
+      if(found)body+=`<img class="viewer-illust" src="${found.src}" alt="">`;
     }
     else if(l.startsWith('"')||l.startsWith('\u201c')){body+=`<p class="dialogue">${esc(l)}</p>`;}
     else{body+=`<p>${esc(l)}</p>`;}
@@ -1205,7 +1204,11 @@ function renderViewer(idx){
     <div class="viewer-chapter-title">제 ${ep.num}화 — ${esc(ep.title)}</div>
     ${ep.sub?`<div class="viewer-chapter-sub">${esc(ep.sub)}</div>`:''}
     <div class="viewer-body">${body}</div>
-    ${idx===pub.length-1?'<p style="text-align:center;font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:.9rem;color:var(--text-dim);margin-top:3rem">— 다음 화는 업데이트 예정입니다 —</p>':''}`;
+    ${idx===pub.length-1?'<p style="text-align:center;font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:.9rem;color:var(--text-dim);margin-top:3rem">— 다음 화는 업데이트 예정입니다 —</p>':''}
+    <div style="display:flex;justify-content:space-between;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border);gap:1rem">
+      <button class="viewer-btn" onclick="navigateEp(-1)" style="padding:.7rem 1.8rem;font-size:.8rem">← 이전화</button>
+      <button class="viewer-btn" onclick="navigateEp(1)" style="padding:.7rem 1.8rem;font-size:.8rem">다음화 →</button>
+    </div>`;
 }
 function navigateEp(d){
   const pub=D.episodes.filter(e=>e.status==='pub');
